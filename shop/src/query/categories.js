@@ -5,6 +5,7 @@ export const GET_CATEGORIES = gql`
     categories {
       name
       products {
+        gallery
         name
         id
         description
