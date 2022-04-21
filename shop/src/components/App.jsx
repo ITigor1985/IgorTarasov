@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/client';
-import { GET_CATEGORIES } from 'query/categories';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Component } from 'react';
 import All from 'pages/all/all';
