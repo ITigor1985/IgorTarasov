@@ -9,8 +9,7 @@ class All extends Component {
 
   render() {
     const { currencie } = this.props;
-    console.log(currencie);
-    let price = [];
+
     return (
       <div>
         <Query query={GET_CATEGORIES}>
