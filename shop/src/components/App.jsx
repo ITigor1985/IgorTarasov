@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Query } from '@apollo/client/react/components';
+import { GET_CURRENCIES } from 'query/categories';
 import { Component } from 'react';
 import All from 'pages/all/all';
 import Clothes from 'pages/clothes/clothes';
@@ -23,17 +25,37 @@ import Tech from 'pages/tech/tech';
 class App extends Component {
   state = {
     isLoading: false,
-    categories: [],
+    currencie: 'USD',
+  };
+
+  setCurrencie = label => {
+    this.setState({ currencie: label });
   };
 
   render() {
     return (
       <div>
+        <Query query={GET_CURRENCIES}>
+          {({ loading, data }) => {
+            if (loading) return 'Loading...';
+            const { currencies } = data;
+            return currencies.map(({ label, symbol }) => (
+              <button
+                type="button"
+                onClick={() => this.setCurrencie(label)}
+                key={label}
+              >
+                {label}
+                {symbol}
+              </button>
+            ));
+          }}
+        </Query>
         <Router>
           <div>
             <ul>
               <li>
-                <Link to="/">All</Link>
+                <Link to="/all">All</Link>
               </li>
               <li>
                 <Link to="/clothes">Clothes</Link>
@@ -46,8 +68,8 @@ class App extends Component {
             <hr />
 
             <Switch>
-              <Route exact path="/">
-                <All />
+              <Route exact path="/all">
+                <All currencie={this.state.currencie} />
               </Route>
               <Route path="/clothes">
                 <Clothes />
