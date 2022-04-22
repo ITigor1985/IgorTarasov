@@ -33,7 +33,7 @@ class All extends Component {
                       {product.prices
                         .filter(price => price.currency.label === currencie)
                         .map(cost => (
-                          <span>{cost.amount}</span>
+                          <span key={cost.label}>{cost.amount}</span>
                         ))}
                       {currencie}
                     </p>
