@@ -31,11 +31,11 @@ class All extends Component {
                     />
                     <p>{product.name}</p>
                     <p>
-                      {console.log(
-                        product.prices.filter(
-                          price => price.currency.label === currencie
-                        )
-                      )}
+                      {product.prices
+                        .filter(price => price.currency.label === currencie)
+                        .map(cost => (
+                          <span>{cost.amount}</span>
+                        ))}
                       {currencie}
                     </p>
                   </div>
