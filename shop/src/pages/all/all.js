@@ -1,29 +1,35 @@
 import { Query } from '@apollo/client/react/components';
 import { GET_CATEGORIES } from 'query/categories';
 import { Component } from 'react';
+import './all.css';
 class All extends Component {
   // getCurrence(arr) {
   //   console.log(arr, this.props.currencie);
   //   return arr[0].currency.label;
   // }
+
   state = {
-    cartVisible: false,
+    activCardIndex: null,
   };
 
-  onCartVisible = e => {
-    console.log(e.target);
-    this.setState({ cartVisible: true });
+  activStyleCard = index => {
+    console.log(index);
+    const styleOption = ['cart'];
+    if (this.state.activCardIndex === index) {
+      styleOption.push('cart__visible');
+    }
+    return styleOption.join(' ');
   };
-  onCartInvisible = () => {
-    this.setState({ cartVisible: false });
+
+  setActiveCard = index => {
+    this.setState({ activCardIndex: index });
   };
 
   render() {
-    const { cartVisible } = this.state;
     const { currencie } = this.props;
 
     return (
-      <div>
+      <div class="listCard">
         <Query query={GET_CATEGORIES}>
           {({ loading, data }) => {
             if (loading) return 'Loading...';
@@ -33,9 +39,10 @@ class All extends Component {
               if (category.name === 'all') {
                 return category.products.map((product, index) => (
                   <div
+                    class="card"
                     key={product.id}
-                    onMouseOver={this.onCartVisible}
-                    onMouseOut={this.onCartInvisible}
+                    onMouseOver={() => this.setActiveCard(index)}
+                    onMouseOut={() => this.setState({ activCardIndex: null })}
                     style={{ display: 'inline-block' }}
                     value={index}
                   >
@@ -56,7 +63,7 @@ class All extends Component {
                           </span>
                         ))}
                     </p>
-                    {cartVisible && <p>cart</p>}
+                    <p className={this.activStyleCard(index)}>cart</p>
                   </div>
                 ));
               }
