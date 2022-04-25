@@ -13,7 +13,6 @@ class All extends Component {
   };
 
   activStyleCard = index => {
-    console.log(index);
     const styleOption = ['cart'];
     if (this.state.activCardIndex === index) {
       styleOption.push('cart__visible');
@@ -63,7 +62,12 @@ class All extends Component {
                           </span>
                         ))}
                     </p>
-                    <p className={this.activStyleCard(index)}>cart</p>
+                    <button
+                      type="button"
+                      className={this.activStyleCard(index)}
+                    >
+                      cart
+                    </button>
                   </div>
                 ));
               }
