@@ -29,7 +29,7 @@ class All extends Component {
     const { currencie } = this.props;
 
     return (
-      <div class="listCard">
+      <div className="listCard">
         <Query query={GET_CATEGORIES}>
           {({ loading, data }) => {
             if (loading) return 'Loading...';
@@ -39,7 +39,7 @@ class All extends Component {
               if (category.name === 'all') {
                 return category.products.map((product, index) => (
                   <div
-                    class="card"
+                    className="card"
                     key={product.id}
                     onMouseOver={() => this.setActiveCard(index)}
                     onMouseOut={() => this.setState({ activCardIndex: null })}

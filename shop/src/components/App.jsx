@@ -72,7 +72,7 @@ class App extends Component {
                 <All currencie={this.state.currencie} />
               </Route>
               <Route path="/clothes">
-                <Clothes />
+                <Clothes currencie={this.state.currencie} />
               </Route>
               <Route path="/tech">
                 <Tech />
