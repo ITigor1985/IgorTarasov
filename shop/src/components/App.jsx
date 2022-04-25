@@ -5,6 +5,7 @@ import { Component } from 'react';
 import All from 'pages/all/all';
 import Clothes from 'pages/clothes/clothes';
 import Tech from 'pages/tech/tech';
+import Cart from 'pages/cart/cart';
 // export const App = () => {
 //   const { loading, error, data } = useQuery(GET_CATEGORIES);
 //   const [categories, setCategories] = useState([]);
@@ -35,22 +36,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Query query={GET_CURRENCIES}>
-          {({ loading, data }) => {
-            if (loading) return 'Loading...';
-            const { currencies } = data;
-            return currencies.map(({ label, symbol }) => (
-              <button
-                type="button"
-                onClick={() => this.setCurrencie(label)}
-                key={label}
-              >
-                {label}
-                {symbol}
-              </button>
-            ));
-          }}
-        </Query>
         <Router>
           <div>
             <ul>
@@ -64,7 +49,25 @@ class App extends Component {
                 <Link to="/tech">Tech</Link>
               </li>
             </ul>
-
+            <Query query={GET_CURRENCIES}>
+              {({ loading, data }) => {
+                if (loading) return 'Loading...';
+                const { currencies } = data;
+                return currencies.map(({ label, symbol }) => (
+                  <button
+                    type="button"
+                    onClick={() => this.setCurrencie(label)}
+                    key={label}
+                  >
+                    {label}
+                    {symbol}
+                  </button>
+                ));
+              }}
+            </Query>
+            <button type="button">
+              <Link to="/cart">Cart</Link>
+            </button>
             <hr />
 
             <Switch>
@@ -75,7 +78,10 @@ class App extends Component {
                 <Clothes currencie={this.state.currencie} />
               </Route>
               <Route path="/tech">
-                <Tech />
+                <Tech currencie={this.state.currencie} />
+              </Route>
+              <Route path="/cart">
+                <Cart currencie={this.state.currencie} />
               </Route>
             </Switch>
           </div>
