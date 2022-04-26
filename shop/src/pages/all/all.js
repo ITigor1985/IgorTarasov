@@ -31,6 +31,7 @@ class All extends Component {
       <div className="listCard">
         <Query query={GET_CATEGORIES}>
           {({ loading, data }) => {
+            console.log(data);
             if (loading) return 'Loading...';
 
             const { categories } = data;

@@ -24,10 +24,39 @@ export const GET_CATEGORIES = gql`
 `;
 
 export const GET_CURRENCIES = gql`
-  query {
+  query GetCurrencies {
     currencies {
       label
       symbol
+    }
+  }
+`;
+
+export const GET_PRODUCT = gql`
+  query ($id: String!) {
+    product(id: $id) {
+      id
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
+      name
+      description
+      category
+      prices {
+        currency {
+          symbol
+          label
+        }
+        amount
+      }
+      brand
     }
   }
 `;
