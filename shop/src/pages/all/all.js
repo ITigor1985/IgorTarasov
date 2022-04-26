@@ -52,6 +52,7 @@ class All extends Component {
                       width="356"
                       height="358"
                     />
+                    {!product.inStock && <p>IN STOCK OUT</p>}
                     <p>{product.name}</p>
                     <p>
                       {product.prices
