@@ -1,29 +1,14 @@
 import { Component } from 'react';
 import { GET_CATEGORIES } from 'query/categories';
 import { Query } from '@apollo/client/react/components';
+import ProductsListItem from 'components/ProductsListItem';
+
 class Tech extends Component {
-  state = {
-    activCardIndex: null,
-  };
-
-  activStyleCard = index => {
-    console.log(index);
-    const styleOption = ['cart'];
-    if (this.state.activCardIndex === index) {
-      styleOption.push('cart__visible');
-    }
-    return styleOption.join(' ');
-  };
-
-  setActiveCard = index => {
-    this.setState({ activCardIndex: index });
-  };
-
   render() {
-    const { currencie } = this.props;
+    const { currencie, setActiveCard, activStyleCard, modalOpen } = this.props;
 
     return (
-      <div className="listCard">
+      <ul className="listCard">
         <Query query={GET_CATEGORIES}>
           {({ loading, data }) => {
             if (loading) return 'Loading...';
@@ -32,40 +17,21 @@ class Tech extends Component {
             return categories.map(category => {
               if (category.name === 'tech') {
                 return category.products.map((product, index) => (
-                  <div
-                    className="card"
-                    key={product.id}
-                    onMouseOver={() => this.setActiveCard(index)}
-                    onMouseOut={() => this.setState({ activCardIndex: null })}
-                    style={{ display: 'inline-block' }}
-                    value={index}
-                  >
-                    <img
-                      src={product.gallery[0]}
-                      alt={product.name}
-                      width="356"
-                      height="358"
-                    />
-                    <p>{product.name}</p>
-                    <p>
-                      {product.prices
-                        .filter(price => price.currency.label === currencie)
-                        .map(cost => (
-                          <span key={cost.currency.label}>
-                            {cost.amount}
-                            {cost.currency.symbol}
-                          </span>
-                        ))}
-                    </p>
-                    <p className={this.activStyleCard(index)}>cart</p>
-                  </div>
+                  <ProductsListItem
+                    product={product}
+                    index={index}
+                    setActiveCard={setActiveCard}
+                    activStyleCard={activStyleCard}
+                    currencie={currencie}
+                    modalOpen={modalOpen}
+                  />
                 ));
               }
               return null;
             });
           }}
         </Query>
-      </div>
+      </ul>
     );
   }
 }

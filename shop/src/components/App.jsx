@@ -6,31 +6,52 @@ import All from 'pages/all/all';
 import Clothes from 'pages/clothes/clothes';
 import Tech from 'pages/tech/tech';
 import Cart from 'pages/cart/cart';
-// export const App = () => {
-//   const { loading, error, data } = useQuery(GET_CATEGORIES);
-//   const [categories, setCategories] = useState([]);
-//   useEffect(() => {
-//     if (!loading) {
-//       setCategories(data.categories);
-//     }
-//   }, [data, loading]);
-//   return (
-//     <div>
-//       {categories.map((categori, index) => (
-//         <div key={index}> {categori.name}</div>
-//       ))}
-//     </div>
-//   );
-// };
+import Modal from './Modal';
 
 class App extends Component {
   state = {
+    activCardIndex: null,
     isLoading: false,
     currencie: 'USD',
   };
 
   setCurrencie = label => {
     this.setState({ currencie: label });
+  };
+
+  activStyleCard = index => {
+    const styleOption = ['cart'];
+    if (this.state.activCardIndex === index) {
+      styleOption.push('cart__visible');
+    }
+    return styleOption.join(' ');
+  };
+
+  setActiveCard = index => {
+    this.setState({ activCardIndex: index });
+  };
+
+  modalOpen = (id, event) => {
+    event.preventDefault();
+    this.setState({
+      productId: id,
+    });
+  };
+  componentDidMount() {
+    window.addEventListener('keydown', this.cleanEventListener);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.cleanEventListener);
+  }
+
+  modalClose = () => {
+    this.setState({ productId: '' });
+  };
+
+  cleanEventListener = e => {
+    if (e.code === 'Escape') {
+      this.modalClose();
+    }
   };
 
   render() {
@@ -72,13 +93,26 @@ class App extends Component {
 
             <Switch>
               <Route exact path="/all">
-                <All currencie={this.state.currencie} />
+                <All
+                  currencie={this.state.currencie}
+                  activStyleCard={this.activStyleCard}
+                  setActiveCard={this.setActiveCard}
+                />
               </Route>
               <Route path="/clothes">
-                <Clothes currencie={this.state.currencie} />
+                <Clothes
+                  currencie={this.state.currencie}
+                  activStyleCard={this.activStyleCard}
+                  setActiveCard={this.setActiveCard}
+                />
               </Route>
               <Route path="/tech">
-                <Tech currencie={this.state.currencie} />
+                <Tech
+                  currencie={this.state.currencie}
+                  activStyleCard={this.activStyleCard}
+                  setActiveCard={this.setActiveCard}
+                  modalOpen={this.modalOpen}
+                />
               </Route>
               <Route path="/cart">
                 <Cart currencie={this.state.currencie} />
@@ -86,6 +120,9 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
+        {this.state.productId && (
+          <Modal productId={this.state.productId} onClick={this.modalClose} />
+        )}
       </div>
     );
   }
