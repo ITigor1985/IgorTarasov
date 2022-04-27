@@ -31,10 +31,11 @@ class App extends Component {
     this.setState({ activCardIndex: index });
   };
 
-  modalOpen = (id, event) => {
+  modalOpen = (id, bigImage, event) => {
     event.preventDefault();
     this.setState({
       productId: id,
+      firstNaturalSizeImage: bigImage,
     });
   };
   componentDidMount() {
@@ -45,7 +46,7 @@ class App extends Component {
   }
 
   modalClose = () => {
-    this.setState({ productId: '' });
+    this.setState({ productId: '', firstNaturalSizeImage: '' });
   };
 
   cleanEventListener = e => {
@@ -120,8 +121,12 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-        {this.state.productId && (
-          <Modal productId={this.state.productId} onClick={this.modalClose} />
+        {this.state.productId && this.state.firstNaturalSizeImage && (
+          <Modal
+            productId={this.state.productId}
+            bigImage={this.state.firstNaturalSizeImage}
+            //onClick={this.modalClose}
+          />
         )}
       </div>
     );

@@ -9,7 +9,7 @@ const ProductsListItem = ({
   return (
     <>
       <li
-        onClick={event => modalOpen(product.id, event)}
+        onClick={event => modalOpen(product.id, product.gallery[0], event)}
         className="card"
         key={product.id}
         onMouseOver={() => setActiveCard(index)}

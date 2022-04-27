@@ -46,6 +46,7 @@ export const GET_PRODUCT = gql`
           id
         }
       }
+      gallery
       name
       description
       category
