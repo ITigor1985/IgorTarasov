@@ -44,6 +44,10 @@ class Modal extends Component {
                       height={510}
                     />
                   </div>
+                  <div>
+                    <p className="brand">{product.brand}</p>
+                    <p className="name">{product.name}</p>
+                  </div>
                 </div>
               );
             }}
