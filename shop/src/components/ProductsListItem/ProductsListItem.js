@@ -11,7 +11,6 @@ const ProductsListItem = ({
       <li
         onClick={event => modalOpen(product.id, product.gallery[0], event)}
         className="card"
-        key={product.id}
         onMouseOver={() => setActiveCard(index)}
         onMouseOut={() => setActiveCard(null)}
         style={{ display: 'inline-block' }}

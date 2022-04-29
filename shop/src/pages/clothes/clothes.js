@@ -22,6 +22,7 @@ class Clothes extends Component {
                     setActiveCard={setActiveCard}
                     activStyleCard={activStyleCard}
                     currencie={currencie}
+                    key={product.id}
                   />
                 ));
               }

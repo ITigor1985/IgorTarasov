@@ -14,10 +14,11 @@
 .modal {
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
+  background-color: white;
 }
 .brand {
-  color: white;
+  color: rgb(3, 3, 3);
 }
 .name {
-  color: white;
+  color: rgb(0, 0, 0);
 }

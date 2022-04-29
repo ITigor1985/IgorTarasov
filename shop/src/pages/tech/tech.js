@@ -24,6 +24,7 @@ class Tech extends Component {
                     activStyleCard={activStyleCard}
                     currencie={currencie}
                     modalOpen={modalOpen}
+                    key={product.id}
                   />
                 ));
               }

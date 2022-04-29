@@ -22,6 +22,7 @@ class Modal extends Component {
             {({ data, loading }) => {
               if (loading) return 'Loading...';
               const { product } = data;
+              console.log(product);
               return (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <ul>
