@@ -2,6 +2,8 @@ import './modal.css';
 import { Query } from '@apollo/client/react/components';
 import { GET_PRODUCT } from 'query/categories';
 import { Component } from 'react';
+import Attributes from 'components/Attributes';
+import Currency from 'components/Currency';
 
 class Modal extends Component {
   state = {
@@ -12,8 +14,12 @@ class Modal extends Component {
     this.setState({ bigImage: image });
   };
 
+  cleanString(string) {
+    return { __html: string };
+  }
+
   render() {
-    const { productId, onClick } = this.props;
+    const { productId, onClick, currencie } = this.props;
     const id = String(productId);
     return (
       <div className="overlay" onClick={onClick}>
@@ -48,6 +54,15 @@ class Modal extends Component {
                   <div>
                     <p className="brand">{product.brand}</p>
                     <p className="name">{product.name}</p>
+                    <Attributes productAttributes={product.attributes} />
+                    <h3>Price:</h3>
+                    <Currency product={product} currencie={currencie} />
+                    <button type="button">ADD TO CART</button>
+                    <p
+                      dangerouslySetInnerHTML={this.cleanString(
+                        product.description
+                      )}
+                    ></p>
                   </div>
                 </div>
               );

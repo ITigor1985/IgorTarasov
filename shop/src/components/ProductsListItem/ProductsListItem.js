@@ -1,3 +1,5 @@
+import Currency from 'components/Currency';
+
 const ProductsListItem = ({
   product,
   setActiveCard,
@@ -23,16 +25,7 @@ const ProductsListItem = ({
           height="358"
         />
         <p>{product.name}</p>
-        <p>
-          {product.prices
-            .filter(price => price.currency.label === currencie)
-            .map(cost => (
-              <span key={cost.currency.label}>
-                {cost.amount}
-                {cost.currency.symbol}
-              </span>
-            ))}
-        </p>
+        <Currency product={product} currencie={currencie} />
         <p className={activStyleCard(index)}>cart</p>
       </li>
     </>

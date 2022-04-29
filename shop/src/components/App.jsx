@@ -98,6 +98,7 @@ class App extends Component {
                   currencie={this.state.currencie}
                   activStyleCard={this.activStyleCard}
                   setActiveCard={this.setActiveCard}
+                  modalOpen={this.modalOpen}
                 />
               </Route>
               <Route path="/clothes">
@@ -105,6 +106,7 @@ class App extends Component {
                   currencie={this.state.currencie}
                   activStyleCard={this.activStyleCard}
                   setActiveCard={this.setActiveCard}
+                  modalOpen={this.modalOpen}
                 />
               </Route>
               <Route path="/tech">
@@ -125,6 +127,7 @@ class App extends Component {
           <Modal
             productId={this.state.productId}
             bigImage={this.state.firstNaturalSizeImage}
+            currencie={this.state.currencie}
             //onClick={this.modalClose}
           />
         )}
