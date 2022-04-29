@@ -1,22 +1,23 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Query } from '@apollo/client/react/components';
-import { GET_CURRENCIES } from 'query/categories';
+
 import { Component } from 'react';
 import All from 'pages/all/all';
 import Clothes from 'pages/clothes/clothes';
 import Tech from 'pages/tech/tech';
 import Cart from 'pages/cart/cart';
 import Modal from './Modal';
+import Currencies from './Currencies';
 
 class App extends Component {
   state = {
     activCardIndex: null,
     isLoading: false,
     currencie: 'USD',
+    symbol: '$',
   };
 
-  setCurrencie = label => {
-    this.setState({ currencie: label });
+  setCurrencie = (label, symbol) => {
+    this.setState({ currencie: label, symbol: symbol });
   };
 
   activStyleCard = index => {
@@ -71,22 +72,10 @@ class App extends Component {
                 <Link to="/tech">Tech</Link>
               </li>
             </ul>
-            <Query query={GET_CURRENCIES}>
-              {({ loading, data }) => {
-                if (loading) return 'Loading...';
-                const { currencies } = data;
-                return currencies.map(({ label, symbol }) => (
-                  <button
-                    type="button"
-                    onClick={() => this.setCurrencie(label)}
-                    key={label}
-                  >
-                    {label}
-                    {symbol}
-                  </button>
-                ));
-              }}
-            </Query>
+            <Currencies
+              setCurrencie={this.setCurrencie}
+              symbol={this.state.symbol}
+            />
             <button type="button">
               <Link to="/cart">Cart</Link>
             </button>

@@ -1,6 +1,6 @@
 import './modal.css';
 import { Query } from '@apollo/client/react/components';
-import { GET_PRODUCT } from 'query/categories';
+import { GET_PRODUCT } from 'query/query';
 import { Component } from 'react';
 import Attributes from 'components/Attributes';
 import Currency from 'components/Currency';

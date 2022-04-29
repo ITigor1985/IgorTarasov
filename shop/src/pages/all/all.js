@@ -1,5 +1,5 @@
 import { Query } from '@apollo/client/react/components';
-import { GET_CATEGORIES } from 'query/categories';
+import { GET_CATEGORIES } from 'query/query';
 import { Component } from 'react';
 import './all.css';
 import ProductsListItem from 'components/ProductsListItem';
