@@ -1,0 +1,9 @@
+.active {
+  color: #5ece7b;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #5ece7b;
+  font-weight: 600;
+  font-size: 16px;
+
+  line-height: 19px;
+}

@@ -5,6 +5,7 @@ import App from 'components/App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import 'normalize.css';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/',

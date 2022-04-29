@@ -1,4 +1,20 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink,
+} from 'react-router-dom';
+import {
+  Container,
+  LinkList,
+  LinkListItem,
+  Header,
+  ContainerCurrenciesCart,
+  BtnCart,
+} from './App.styled';
+import logo from '../images/a-logo.svg';
+import cart from '../images/vector.svg';
 
 import { Component } from 'react';
 import All from 'pages/all/all';
@@ -7,6 +23,8 @@ import Tech from 'pages/tech/tech';
 import Cart from 'pages/cart/cart';
 import Modal from './Modal';
 import Currencies from './Currencies';
+import { GlobalStyle } from 'GlobalStyled/GlobalStyled.styled';
+import './App.css';
 
 class App extends Component {
   state = {
@@ -58,28 +76,40 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <Router>
           <div>
-            <ul>
-              <li>
-                <Link to="/all">All</Link>
-              </li>
-              <li>
-                <Link to="/clothes">Clothes</Link>
-              </li>
-              <li>
-                <Link to="/tech">Tech</Link>
-              </li>
-            </ul>
-            <Currencies
-              setCurrencie={this.setCurrencie}
-              symbol={this.state.symbol}
-            />
-            <button type="button">
-              <Link to="/cart">Cart</Link>
-            </button>
-            <hr />
+            <Header>
+              <LinkList>
+                <LinkListItem>
+                  <NavLink to="/all" activeClassName="active">
+                    All
+                  </NavLink>
+                </LinkListItem>
+                <LinkListItem>
+                  <NavLink to="/clothes" activeClassName="active">
+                    Clothes
+                  </NavLink>
+                </LinkListItem>
+                <LinkListItem>
+                  <NavLink to="/tech" activeClassName="active">
+                    Tech
+                  </NavLink>
+                </LinkListItem>
+              </LinkList>
+              <img src={logo} alt="logo" width={41} height={41} />
+              <ContainerCurrenciesCart>
+                <Currencies
+                  setCurrencie={this.setCurrencie}
+                  symbol={this.state.symbol}
+                />
+                <BtnCart type="button">
+                  <Link to="/cart">
+                    <img src={cart} width={21} height={18} alt="cart" />
+                  </Link>
+                </BtnCart>
+              </ContainerCurrenciesCart>
+            </Header>
 
             <Switch>
               <Route exact path="/all">
@@ -120,7 +150,8 @@ class App extends Component {
             //onClick={this.modalClose}
           />
         )}
-      </div>
+        <GlobalStyle />
+      </Container>
     );
   }
 }
