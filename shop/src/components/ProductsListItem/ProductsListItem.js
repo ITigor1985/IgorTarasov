@@ -1,4 +1,5 @@
 import Currency from 'components/Currency';
+import { ContainerImg, ImgProduct } from './ProductsListItem.styled';
 
 const ProductsListItem = ({
   product,
@@ -18,12 +19,9 @@ const ProductsListItem = ({
         style={{ display: 'inline-block' }}
         value={index}
       >
-        <img
-          src={product.gallery[0]}
-          alt={product.name}
-          width="356"
-          height="358"
-        />
+        <ContainerImg>
+          <ImgProduct src={product.gallery[0]} alt={product.name} />
+        </ContainerImg>
         <p>{product.name}</p>
         <Currency product={product} currencie={currencie} />
         <p className={activStyleCard(index)}>cart</p>
