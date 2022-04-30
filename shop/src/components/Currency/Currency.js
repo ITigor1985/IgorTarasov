@@ -1,13 +1,15 @@
+import { CurrencyValue } from './Currency.styled';
+
 const Currency = ({ product, currencie }) => {
   return (
     <p>
       {product.prices
         .filter(price => price.currency.label === currencie)
         .map(cost => (
-          <span key={cost.currency.label}>
-            {cost.amount}
+          <CurrencyValue key={cost.currency.label}>
             {cost.currency.symbol}
-          </span>
+            {cost.amount}
+          </CurrencyValue>
         ))}
     </p>
   );

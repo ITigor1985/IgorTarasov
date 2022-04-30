@@ -14,6 +14,8 @@ import {
   ProductName,
   ModalBigImage,
   ContainerModalBigImage,
+  ProductPrice,
+  BtnAddToCart,
 } from './Modal.styled';
 
 class Modal extends Component {
@@ -67,9 +69,9 @@ class Modal extends Component {
                     <ProductBrand>{product.brand}</ProductBrand>
                     <ProductName>{product.name}</ProductName>
                     <Attributes productAttributes={product.attributes} />
-                    <h3>Price:</h3>
+                    <ProductPrice>Price:</ProductPrice>
                     <Currency product={product} currencie={currencie} />
-                    <button type="button">ADD TO CART</button>
+                    <BtnAddToCart type="button">ADD TO CART</BtnAddToCart>
                     <ProductDescription
                       dangerouslySetInnerHTML={this.cleanString(
                         product.description

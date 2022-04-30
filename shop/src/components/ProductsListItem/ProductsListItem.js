@@ -1,5 +1,10 @@
 import Currency from 'components/Currency';
-import { ContainerImg, ImgProduct } from './ProductsListItem.styled';
+import {
+  ContainerImg,
+  ImgProduct,
+  ProductListItemContainer,
+  ProductName,
+} from './ProductsListItem.styled';
 
 const ProductsListItem = ({
   product,
@@ -11,7 +16,7 @@ const ProductsListItem = ({
 }) => {
   return (
     <>
-      <li
+      <ProductListItemContainer
         onClick={event => modalOpen(product.id, product.gallery[0], event)}
         className="card"
         onMouseOver={() => setActiveCard(index)}
@@ -22,10 +27,10 @@ const ProductsListItem = ({
         <ContainerImg>
           <ImgProduct src={product.gallery[0]} alt={product.name} />
         </ContainerImg>
-        <p>{product.name}</p>
+        <ProductName>{product.name}</ProductName>
         <Currency product={product} currencie={currencie} />
         <p className={activStyleCard(index)}>cart</p>
-      </li>
+      </ProductListItemContainer>
     </>
   );
 };
