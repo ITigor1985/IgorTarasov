@@ -52,6 +52,7 @@ class App extends Component {
 
   modalOpen = (id, bigImage, event) => {
     event.preventDefault();
+    document.body.style.overflow = 'hidden';
     this.setState({
       productId: id,
       firstNaturalSizeImage: bigImage,
@@ -64,13 +65,19 @@ class App extends Component {
     window.removeEventListener('keydown', this.cleanEventListener);
   }
 
-  modalClose = () => {
+  modalClose = event => {
+    if (event.currentTarget !== event.target) return;
     this.setState({ productId: '', firstNaturalSizeImage: '' });
+    document.body.style.overflow = 'visible';
+  };
+  modalCloseESC = () => {
+    this.setState({ productId: '', firstNaturalSizeImage: '' });
+    document.body.style.overflow = 'visible';
   };
 
   cleanEventListener = e => {
     if (e.code === 'Escape') {
-      this.modalClose();
+      this.modalCloseESC();
     }
   };
 
@@ -147,7 +154,7 @@ class App extends Component {
             productId={this.state.productId}
             bigImage={this.state.firstNaturalSizeImage}
             currencie={this.state.currencie}
-            //onClick={this.modalClose}
+            onClick={this.modalClose}
           />
         )}
         <GlobalStyle />

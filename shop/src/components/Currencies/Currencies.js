@@ -1,7 +1,13 @@
 import { Component } from 'react';
 import { Query } from '@apollo/client/react/components';
 import { GET_CURRENCIES } from '../../query/query';
-import { BtnCurrenciesSelection, Symbol } from './Currencies.styled';
+import {
+  BtnCurrenciesSelection,
+  Symbol,
+  BtnCurrency,
+  ContainerCurrencyDropDown,
+  Container,
+} from './Currencies.styled';
 
 class Currencies extends Component {
   state = {
@@ -17,7 +23,7 @@ class Currencies extends Component {
   render() {
     const { setCurrencie, symbol } = this.props;
     return (
-      <>
+      <Container>
         <BtnCurrenciesSelection type="button" onClick={this.toggle}>
           <Symbol>{symbol}</Symbol>
           <svg width="6" height="3" viewBox="0 0 42 25">
@@ -25,32 +31,32 @@ class Currencies extends Component {
               d="M3 3L21 21L39 3"
               fill="none"
               stroke="black"
-              stroke-width="7"
-              stroke-linecap="round"
+              strokeWidth="7"
+              strokeLinecap="round"
             />
           </svg>
         </BtnCurrenciesSelection>
         {this.state.dropCurrenciesMenu && (
-          <div>
+          <ContainerCurrencyDropDown>
             <Query query={GET_CURRENCIES}>
               {({ loading, data }) => {
                 if (loading) return 'Loading...';
                 const { currencies } = data;
                 return currencies.map(({ label, symbol }) => (
-                  <button
+                  <BtnCurrency
                     type="button"
                     onClick={() => setCurrencie(label, symbol)}
                     key={label}
                   >
                     {label}
                     {symbol}
-                  </button>
+                  </BtnCurrency>
                 ));
               }}
             </Query>
-          </div>
+          </ContainerCurrencyDropDown>
         )}
-      </>
+      </Container>
     );
   }
 }

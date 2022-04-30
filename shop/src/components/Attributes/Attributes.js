@@ -9,11 +9,11 @@ import './Attributes.css';
 
 class Attributes extends Component {
   state = {
-    activColorIndex: 0,
-    activCapacityIndex: 0,
-    activUSBIndex: 0,
-    activTIDIndex: 0,
-    activSizeIndex: 0,
+    // activColorIndex: 0,
+    // activCapacityIndex: 0,
+    // activUSBIndex: 0,
+    // activTIDIndex: 0,
+    // activSizeIndex: 0,
   };
 
   activStyleColorButton = index => {
