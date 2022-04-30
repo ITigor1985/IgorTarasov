@@ -4,6 +4,7 @@ import { GET_PRODUCT } from 'query/query';
 import { Component } from 'react';
 import Attributes from 'components/Attributes';
 import Currency from 'components/Currency';
+import { Container } from './Modal.styled';
 
 class Modal extends Component {
   state = {
@@ -23,7 +24,7 @@ class Modal extends Component {
     const id = String(productId);
     return (
       <div className="overlay" onClick={onClick}>
-        <div className="modal">
+        <Container className="modal">
           <Query variables={{ id }} query={GET_PRODUCT}>
             {({ data, loading }) => {
               if (loading) return 'Loading...';
@@ -68,7 +69,7 @@ class Modal extends Component {
               );
             }}
           </Query>
-        </div>
+        </Container>
       </div>
     );
   }

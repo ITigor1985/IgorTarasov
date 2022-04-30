@@ -1,0 +1,21 @@
+.Color__button {
+  border: none;
+}
+
+.Color__button--active {
+  width: 30px;
+  height: 30px;
+
+  padding: 2px;
+  border: 1px solid #5ece7b;
+}
+
+.Atrribute__button--active {
+  background-color: black;
+  color: white;
+}
+
+.attributeSize {
+  width: 32px;
+  height: 32px;
+}
