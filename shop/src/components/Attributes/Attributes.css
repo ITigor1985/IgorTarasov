@@ -10,7 +10,10 @@
   border: 1px solid #5ece7b;
 }
 
-.Atrribute__button--active {
+.Capacity__button--active,
+.USB__button--active,
+.TID__button--active,
+.Size__button--active {
   background-color: black;
   color: white;
 }

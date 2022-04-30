@@ -4,7 +4,17 @@ import { GET_PRODUCT } from 'query/query';
 import { Component } from 'react';
 import Attributes from 'components/Attributes';
 import Currency from 'components/Currency';
-import { Container } from './Modal.styled';
+import {
+  Container,
+  ContainerDescription,
+  ListGallery,
+  ListGalleryItem,
+  ProductDescription,
+  ProductBrand,
+  ProductName,
+  ModalBigImage,
+  ContainerModalBigImage,
+} from './Modal.styled';
 
 class Modal extends Component {
   state = {
@@ -32,39 +42,40 @@ class Modal extends Component {
               console.log(product);
               return (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <ul>
+                  <ListGallery>
                     {product.gallery.map((image, index) => (
-                      <li key={index} onClick={() => this.setImage(image)}>
+                      <ListGalleryItem
+                        key={index}
+                        onClick={() => this.setImage(image)}
+                      >
                         <img
                           src={image}
                           alt={product.name}
                           width={90}
                           height={90}
                         />
-                      </li>
+                      </ListGalleryItem>
                     ))}
-                  </ul>
-                  <div>
-                    <img
+                  </ListGallery>
+                  <ContainerModalBigImage>
+                    <ModalBigImage
                       src={this.state.bigImage}
                       alt={product.name}
-                      width={610}
-                      height={510}
                     />
-                  </div>
-                  <div>
-                    <p className="brand">{product.brand}</p>
-                    <p className="name">{product.name}</p>
+                  </ContainerModalBigImage>
+                  <ContainerDescription>
+                    <ProductBrand>{product.brand}</ProductBrand>
+                    <ProductName>{product.name}</ProductName>
                     <Attributes productAttributes={product.attributes} />
                     <h3>Price:</h3>
                     <Currency product={product} currencie={currencie} />
                     <button type="button">ADD TO CART</button>
-                    <p
+                    <ProductDescription
                       dangerouslySetInnerHTML={this.cleanString(
                         product.description
                       )}
-                    ></p>
-                  </div>
+                    ></ProductDescription>
+                  </ContainerDescription>
                 </div>
               );
             }}

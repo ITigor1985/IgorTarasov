@@ -16,9 +16,7 @@
   max-height: calc(100vh - 24px);
   background-color: white;
 }
-.brand {
-  color: rgb(3, 3, 3);
-}
+
 .name {
   color: rgb(0, 0, 0);
 }
