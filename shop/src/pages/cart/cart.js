@@ -3,6 +3,9 @@ import { Query } from '@apollo/client/react/components';
 import { GET_PRODUCT } from 'query/query';
 
 class Cart extends Component {
+  state = {
+    products: [],
+  };
   render() {
     const id = 'jacket-canada-goosee';
 

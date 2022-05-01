@@ -4,6 +4,7 @@ import { GET_PRODUCT } from 'query/query';
 import { Component } from 'react';
 import Attributes from 'components/Attributes';
 import Currency from 'components/Currency';
+
 import {
   Container,
   ContainerDescription,
