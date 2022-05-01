@@ -33,7 +33,7 @@ class Modal extends Component {
   }
 
   render() {
-    const { productId, onClick, currencie } = this.props;
+    const { productId, onClick, currencie, setCartProduct } = this.props;
     const id = String(productId);
     return (
       <div className="overlay" onClick={onClick}>
@@ -42,7 +42,6 @@ class Modal extends Component {
             {({ data, loading }) => {
               if (loading) return 'Loading...';
               const { product } = data;
-              console.log(product);
               return (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <ListGallery>
@@ -72,7 +71,12 @@ class Modal extends Component {
                     <Attributes productAttributes={product.attributes} />
                     <ProductPrice>Price:</ProductPrice>
                     <Currency product={product} currencie={currencie} />
-                    <BtnAddToCart type="button">ADD TO CART</BtnAddToCart>
+                    <BtnAddToCart
+                      type="button"
+                      onClick={() => setCartProduct(product)}
+                    >
+                      ADD TO CART
+                    </BtnAddToCart>
                     <ProductDescription
                       dangerouslySetInnerHTML={this.cleanString(
                         product.description

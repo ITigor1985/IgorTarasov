@@ -1,21 +1,22 @@
 import { Component } from 'react';
-import { Query } from '@apollo/client/react/components';
-import { GET_PRODUCT } from 'query/query';
 
 class Cart extends Component {
   state = {
     products: [],
   };
+
+  componentDidMount() {
+    this.setState({ products: this.props.product });
+  }
+
   render() {
-    const id = 'jacket-canada-goosee';
+    const { products } = this.state;
 
     return (
       <>
-        <Query variables={{ id }} query={GET_PRODUCT}>
-          {({ data }) => {
-            return <div>{console.log(data)}</div>;
-          }}
-        </Query>
+        {products.map(product => (
+          <div key={product.id}>{product.name}</div>
+        ))}
       </>
     );
   }

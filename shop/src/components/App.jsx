@@ -29,13 +29,21 @@ import './App.css';
 class App extends Component {
   state = {
     activCardIndex: null,
-    isLoading: false,
+    cartProduct: [],
     currencie: 'USD',
     symbol: '$',
   };
 
   setCurrencie = (label, symbol) => {
     this.setState({ currencie: label, symbol: symbol });
+  };
+
+  setCartProduct = product => {
+    console.log(product);
+    console.log(this.state.cartProduct);
+    this.setState(prevState => ({
+      cartProduct: [...prevState.cartProduct, product],
+    }));
   };
 
   activStyleCard = index => {
@@ -144,7 +152,10 @@ class App extends Component {
                 />
               </Route>
               <Route path="/cart">
-                <Cart currencie={this.state.currencie} />
+                <Cart
+                  currencie={this.state.currencie}
+                  product={this.state.cartProduct}
+                />
               </Route>
             </Switch>
           </div>
@@ -154,6 +165,7 @@ class App extends Component {
             productId={this.state.productId}
             bigImage={this.state.firstNaturalSizeImage}
             currencie={this.state.currencie}
+            setCartProduct={this.setCartProduct}
             onClick={this.modalClose}
           />
         )}
