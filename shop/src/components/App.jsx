@@ -39,8 +39,6 @@ class App extends Component {
   };
 
   setCartProduct = product => {
-    console.log(product);
-    console.log(this.state.cartProduct);
     this.setState(prevState => ({
       cartProduct: [...prevState.cartProduct, product],
     }));
