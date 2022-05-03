@@ -35,6 +35,8 @@ class Modal extends Component {
   render() {
     const { productId, onClick, currencie, setCartProduct } = this.props;
     const id = String(productId);
+    const quantity = 1;
+    const imageIndex = 0;
     return (
       <div className="overlay" onClick={onClick}>
         <Container className="modal">
@@ -73,7 +75,9 @@ class Modal extends Component {
                     <Currency product={product} currencie={currencie} />
                     <BtnAddToCart
                       type="button"
-                      onClick={() => setCartProduct(product)}
+                      onClick={() =>
+                        setCartProduct({ product, quantity, imageIndex })
+                      }
                     >
                       ADD TO CART
                     </BtnAddToCart>

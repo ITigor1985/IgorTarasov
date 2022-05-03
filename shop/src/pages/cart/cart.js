@@ -16,19 +16,45 @@ import {
 
 class Cart extends Component {
   state = {
-    products: [],
-    vieweImageIndex: 0,
+    products: this.props.product,
+    result: 0,
   };
 
-  componentDidMount() {
-    this.setState({ products: this.props.product });
-  }
-
-  setNextActiveImage = index => {};
-  setPrevActiveImage = () => {
-    this.setState(prevState => ({
-      vieweImageIndex: prevState.vieweImageIndex - 1,
+  handleIncrement = (quantity, id) => {
+    const increment = quantity + 1;
+    const products = this.state.products.map(product => ({
+      ...product,
+      quantity: product.product.id === id ? increment : product.quantity,
     }));
+    this.setState({ products: products });
+  };
+  handleDecrement = (quantity, id) => {
+    const decrement = quantity - 1;
+    if (decrement < 1) return;
+    const products = this.state.products.map(product => ({
+      ...product,
+      quantity: product.product.id === id ? decrement : product.quantity,
+    }));
+    this.setState({ products: products });
+  };
+
+  setNextActiveImage = (imageIndex, id, length) => {
+    const next = imageIndex + 1;
+    if (next > length - 1) return;
+    const products = this.state.products.map(product => ({
+      ...product,
+      imageIndex: product.product.id === id ? next : product.imageIndex,
+    }));
+    this.setState({ products: products });
+  };
+  setPrevActiveImage = (imageIndex, id) => {
+    const prev = imageIndex - 1;
+    if (prev < 0) return;
+    const products = this.state.products.map(product => ({
+      ...product,
+      imageIndex: product.product.id === id ? prev : product.imageIndex,
+    }));
+    this.setState({ products: products });
   };
 
   render() {
@@ -38,9 +64,9 @@ class Cart extends Component {
     return (
       <>
         <h2>Cart</h2>
-        {products.map((product, index) => (
+        {products.map(product => (
           <div
-            key={product.id}
+            key={product.product.id}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -48,28 +74,61 @@ class Cart extends Component {
             }}
           >
             <ContainerDescription>
-              <ProductBrand>{product.brand}</ProductBrand>
-              <ProductName>{product.name}</ProductName>
-              <Currency product={product} currencie={currencie} />
-              <Attributes productAttributes={product.attributes} />
+              <ProductBrand>{product.product.brand}</ProductBrand>
+              <ProductName>{product.product.name}</ProductName>
+              <Currency product={product.product} currencie={currencie} />
+              <Attributes productAttributes={product.product.attributes} />
             </ContainerDescription>
+            <div>
+              <button
+                type="button"
+                onClick={() =>
+                  this.handleIncrement(product.quantity, product.product.id)
+                }
+              >
+                +1
+              </button>
+              {product.quantity}
+              <button
+                type="button"
+                onClick={() =>
+                  this.handleDecrement(product.quantity, product.product.id)
+                }
+              >
+                -1
+              </button>
+            </div>
             <Carousel>
               <ArrowPrev
                 type="button"
-                onClick={() => this.setPrevActiveImage()}
+                onClick={() =>
+                  this.setPrevActiveImage(
+                    product.imageIndex,
+                    product.product.id
+                  )
+                }
               ></ArrowPrev>
               <ContainerGallery>
                 <ListGallery>
-                  {product.gallery.map((image, index) => (
+                  {product.product.gallery.map(index => (
                     <ListGalleryItem key={index}>
-                      <ProductImage src={image} alt={product.name} />
+                      <ProductImage
+                        src={product.product.gallery[product.imageIndex]}
+                        alt={product.product.name}
+                      />
                     </ListGalleryItem>
                   ))}
                 </ListGallery>
               </ContainerGallery>
               <ArrowNext
                 type="button"
-                onClick={() => this.setNextActiveImage()}
+                onClick={() =>
+                  this.setNextActiveImage(
+                    product.imageIndex,
+                    product.product.id,
+                    product.product.gallery.length
+                  )
+                }
               ></ArrowNext>
             </Carousel>
           </div>
