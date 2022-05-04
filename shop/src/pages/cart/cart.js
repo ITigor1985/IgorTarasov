@@ -57,6 +57,11 @@ class Cart extends Component {
     this.setState({ products: products });
   };
 
+  setTotal = products => {
+    const allPrice = products.map(product => product.product.prices);
+    console.log(allPrice);
+  };
+
   render() {
     const { products } = this.state;
     const { currencie } = this.props;
@@ -133,6 +138,7 @@ class Cart extends Component {
             </Carousel>
           </div>
         ))}
+        <p>Total:{this.setTotal(products)}</p>
       </>
     );
   }
