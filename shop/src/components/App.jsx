@@ -152,6 +152,7 @@ class App extends Component {
               <Route path="/cart">
                 <Cart
                   currencie={this.state.currencie}
+                  symbol={this.state.symbol}
                   product={this.state.cartProduct}
                 />
               </Route>

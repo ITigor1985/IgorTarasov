@@ -59,7 +59,21 @@ class Cart extends Component {
 
   setTotal = products => {
     const allPrice = products.map(product => product.product.prices);
-    console.log(allPrice);
+    const filter = allPrice.map(prices =>
+      prices.filter(price => price.currency.label === this.props.currencie)
+    );
+    const allAmount = filter
+      .map(amounts => amounts.map(amount => amount.amount))
+      .flatMap(amount => amount);
+
+    const allQuantity = products
+      .map(quantity => quantity.quantity)
+      .flatMap(quantity => quantity);
+
+    const total = allAmount.reduce((sum, element, index) => {
+      return sum + element * allQuantity[index];
+    }, 0);
+    return total;
   };
 
   render() {
@@ -138,7 +152,10 @@ class Cart extends Component {
             </Carousel>
           </div>
         ))}
-        <p>Total:{this.setTotal(products)}</p>
+        <p>
+          Total:{this.setTotal(products)}
+          {this.props.symbol}
+        </p>
       </>
     );
   }
