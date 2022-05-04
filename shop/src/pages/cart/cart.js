@@ -57,6 +57,12 @@ class Cart extends Component {
     this.setState({ products: products });
   };
 
+  allQuantityProducts(products) {
+    return products
+      .map(quantity => quantity.quantity)
+      .flatMap(quantity => quantity);
+  }
+
   setTotal = products => {
     const allPrice = products.map(product => product.product.prices);
     const filter = allPrice.map(prices =>
@@ -66,14 +72,12 @@ class Cart extends Component {
       .map(amounts => amounts.map(amount => amount.amount))
       .flatMap(amount => amount);
 
-    const allQuantity = products
-      .map(quantity => quantity.quantity)
-      .flatMap(quantity => quantity);
+    const allQuantity = this.allQuantityProducts(products);
 
     const total = allAmount.reduce((sum, element, index) => {
       return sum + element * allQuantity[index];
     }, 0);
-    return total;
+    return total.toFixed(2);
   };
 
   render() {
@@ -153,8 +157,18 @@ class Cart extends Component {
           </div>
         ))}
         <p>
-          Total:{this.setTotal(products)}
-          {this.props.symbol}
+          Tax 21%: {this.props.symbol}
+          {((this.setTotal(products) / 100) * 21).toFixed(2)}
+        </p>
+        <p>
+          Quantity:{' '}
+          {this.allQuantityProducts(products).reduce(function (sum, elem) {
+            return sum + elem;
+          }, 0)}
+        </p>
+        <p>
+          Total: {this.props.symbol}
+          {this.setTotal(products)}
         </p>
       </>
     );

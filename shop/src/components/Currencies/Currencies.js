@@ -26,15 +26,27 @@ class Currencies extends Component {
       <Container>
         <BtnCurrenciesSelection type="button" onClick={this.toggle}>
           <Symbol>{symbol}</Symbol>
-          <svg width="6" height="3" viewBox="0 0 42 25">
-            <path
-              d="M3 3L21 21L39 3"
-              fill="none"
-              stroke="black"
-              strokeWidth="7"
-              strokeLinecap="round"
-            />
-          </svg>
+          {this.state.dropCurrenciesMenu ? (
+            <svg width="6" height="3" viewBox="0 0 42 25">
+              <path
+                d="M3 3 L21 21 L39 3"
+                fill="none"
+                stroke="black"
+                strokeWidth="7"
+                strokeLinecap="round"
+              />
+            </svg>
+          ) : (
+            <svg width="6" height="3" viewBox="0 0 42 25">
+              <path
+                d="M3 21 L21 3 L39 21"
+                fill="none"
+                stroke="black"
+                strokeWidth="7"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
         </BtnCurrenciesSelection>
         {this.state.dropCurrenciesMenu && (
           <ContainerCurrencyDropDown>
