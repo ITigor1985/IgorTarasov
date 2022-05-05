@@ -19,7 +19,6 @@ import {
 class Cart extends Component {
   state = {
     products: this.props.product,
-    result: 0,
   };
 
   handleIncrement = (quantity, id) => {
