@@ -44,7 +44,15 @@ class App extends Component {
     this.setState({ currencie: label, symbol: symbol });
   };
 
-  setCartProduct = product => {
+  setCartProduct = (product, id) => {
+    const existingProduct = this.state.cartProduct.some(
+      prod => prod.product.id === id
+    );
+
+    if (existingProduct) {
+      alert('this product is in the cart');
+      return;
+    }
     this.setState(prevState => ({
       cartProduct: [...prevState.cartProduct, product],
     }));

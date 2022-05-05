@@ -73,10 +73,14 @@ class Modal extends Component {
                     <Attributes productAttributes={product.attributes} />
                     <ProductPrice>Price:</ProductPrice>
                     <Currency product={product} currencie={currencie} />
+
                     <BtnAddToCart
                       type="button"
                       onClick={() =>
-                        setCartProduct({ product, quantity, imageIndex })
+                        setCartProduct(
+                          { product, quantity, imageIndex },
+                          product.id
+                        )
                       }
                     >
                       ADD TO CART
