@@ -1,17 +1,17 @@
 import Attributes from 'components/Attributes';
+import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
 import { Component } from 'react';
 import {
+  BtnDecrement,
+  BtnIncrement,
+  ContainerCart,
+  ContainerCounterCarousel,
   ContainerDescription,
-  ListGallery,
-  ListGalleryItem,
+  Counter,
   ProductBrand,
-  ProductImage,
   ProductName,
-  ContainerGallery,
-  Carousel,
-  ArrowPrev,
-  ArrowNext,
+  TitleCart,
 } from './cart.styled';
 
 class Cart extends Component {
@@ -34,25 +34,6 @@ class Cart extends Component {
     const products = this.state.products.map(product => ({
       ...product,
       quantity: product.product.id === id ? decrement : product.quantity,
-    }));
-    this.setState({ products: products });
-  };
-
-  setNextActiveImage = (imageIndex, id, length) => {
-    const next = imageIndex + 1;
-    if (next > length - 1) return;
-    const products = this.state.products.map(product => ({
-      ...product,
-      imageIndex: product.product.id === id ? next : product.imageIndex,
-    }));
-    this.setState({ products: products });
-  };
-  setPrevActiveImage = (imageIndex, id) => {
-    const prev = imageIndex - 1;
-    if (prev < 0) return;
-    const products = this.state.products.map(product => ({
-      ...product,
-      imageIndex: product.product.id === id ? prev : product.imageIndex,
     }));
     this.setState({ products: products });
   };
@@ -86,76 +67,41 @@ class Cart extends Component {
 
     return (
       <>
-        <h2>Cart</h2>
+        <TitleCart>Cart</TitleCart>
+
         {products.map(product => (
-          <div
-            key={product.product.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
+          <ContainerCart key={product.product.id}>
             <ContainerDescription>
               <ProductBrand>{product.product.brand}</ProductBrand>
               <ProductName>{product.product.name}</ProductName>
               <Currency product={product.product} currencie={currencie} />
               <Attributes productAttributes={product.product.attributes} />
             </ContainerDescription>
-            <div>
-              <button
-                type="button"
-                onClick={() =>
-                  this.handleIncrement(product.quantity, product.product.id)
-                }
-              >
-                +1
-              </button>
-              {product.quantity}
-              <button
-                type="button"
-                onClick={() =>
-                  this.handleDecrement(product.quantity, product.product.id)
-                }
-              >
-                -1
-              </button>
-            </div>
-            <Carousel>
-              <ArrowPrev
-                type="button"
-                onClick={() =>
-                  this.setPrevActiveImage(
-                    product.imageIndex,
-                    product.product.id
-                  )
-                }
-              ></ArrowPrev>
-              <ContainerGallery>
-                <ListGallery>
-                  {product.product.gallery.map(index => (
-                    <ListGalleryItem key={index}>
-                      <ProductImage
-                        src={product.product.gallery[product.imageIndex]}
-                        alt={product.product.name}
-                      />
-                    </ListGalleryItem>
-                  ))}
-                </ListGallery>
-              </ContainerGallery>
-              <ArrowNext
-                type="button"
-                onClick={() =>
-                  this.setNextActiveImage(
-                    product.imageIndex,
-                    product.product.id,
-                    product.product.gallery.length
-                  )
-                }
-              ></ArrowNext>
-            </Carousel>
-          </div>
+            <ContainerCounterCarousel>
+              <Counter>
+                <BtnIncrement
+                  type="button"
+                  onClick={() =>
+                    this.handleIncrement(product.quantity, product.product.id)
+                  }
+                >
+                  +
+                </BtnIncrement>
+                {product.quantity}
+                <BtnDecrement
+                  type="button"
+                  onClick={() =>
+                    this.handleDecrement(product.quantity, product.product.id)
+                  }
+                >
+                  -
+                </BtnDecrement>
+              </Counter>
+              <Carousel product={product} />
+            </ContainerCounterCarousel>
+          </ContainerCart>
         ))}
+
         <p>
           Tax 21%: {this.props.symbol}
           {((this.setTotal(products) / 100) * 21).toFixed(2)}

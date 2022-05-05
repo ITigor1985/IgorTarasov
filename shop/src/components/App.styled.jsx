@@ -10,6 +10,7 @@ export const Header = styled.header`
   align-items: center;
   height: 80px;
   justify-content: space-between;
+  margin-bottom: 80px;
 `;
 
 export const LinkList = styled.ul`

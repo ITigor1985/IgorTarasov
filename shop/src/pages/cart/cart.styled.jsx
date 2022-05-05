@@ -1,5 +1,22 @@
 import styled from 'styled-components';
 
+export const TitleCart = styled.p`
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #1d1f22;
+  margin-bottom: 55px;
+`;
+
+export const ContainerCart = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0px;
+  border-top: 1px solid #e5e5e5;
+`;
+
 export const ContainerDescription = styled.div`
   width: 292px;
 `;
@@ -25,40 +42,28 @@ export const ProductPrice = styled.h3`
   margin-bottom: 10px;
 `;
 
-export const ListGallery = styled.ul`
-  width: 9999px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  transition: margin-left 250ms;
-  font-size: 0;
-`;
-
-export const ListGalleryItem = styled.li`
-  display: inline-block;
-`;
-
-export const ProductImage = styled.img`
-  display: block;
+export const Counter = styled.div`
+  display: flex;
   height: 288px;
-  width: 200px;
-  object-fit: contain;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 24px;
 `;
 
-export const ContainerGallery = styled.div`
-  width: 200px;
-  overflow: hidden;
+export const ContainerCounterCarousel = styled.div`
+  display: flex;
 `;
 
-export const Carousel = styled.div`
-  position: relative;
-  width: 200px;
+export const BtnIncrement = styled.button`
+  width: 45px;
+  height: 45px;
+  background-color: white;
+  font-size: 25px;
 `;
-
-export const ArrowPrev = styled.button`
-  position: absolute;
-`;
-
-export const ArrowNext = styled.button`
-  position: absolute;
+export const BtnDecrement = styled.button`
+  width: 45px;
+  height: 45px;
+  background-color: white;
+  font-size: 25px;
 `;
