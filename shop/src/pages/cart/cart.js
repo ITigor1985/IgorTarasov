@@ -17,28 +17,6 @@ import {
 } from './cart.styled';
 
 class Cart extends Component {
-  state = {
-    products: this.props.product,
-  };
-
-  handleIncrement = (quantity, id) => {
-    const increment = quantity + 1;
-    const products = this.state.products.map(product => ({
-      ...product,
-      quantity: product.product.id === id ? increment : product.quantity,
-    }));
-    this.setState({ products: products });
-  };
-  handleDecrement = (quantity, id) => {
-    const decrement = quantity - 1;
-    if (decrement < 1) return;
-    const products = this.state.products.map(product => ({
-      ...product,
-      quantity: product.product.id === id ? decrement : product.quantity,
-    }));
-    this.setState({ products: products });
-  };
-
   allQuantityProducts(products) {
     const quantity = products
       .map(quantity => quantity.quantity)
@@ -48,7 +26,6 @@ class Cart extends Component {
 
   setTotal = products => {
     const allPrice = products.map(product => product.product.prices);
-
     const filter = allPrice.map(prices =>
       prices.filter(price => price.currency.label === this.props.currencie)
     );
@@ -65,9 +42,8 @@ class Cart extends Component {
   };
 
   render() {
-    const { products } = this.state;
-    const { currencie } = this.props;
-
+    const { currencie, handleIncrement, handleDecrement, products } =
+      this.props;
     return (
       <>
         <TitleCart>Cart</TitleCart>
@@ -84,7 +60,7 @@ class Cart extends Component {
                 <BtnIncrement
                   type="button"
                   onClick={() =>
-                    this.handleIncrement(product.quantity, product.product.id)
+                    handleIncrement(product.quantity, product.product.id)
                   }
                 >
                   +
@@ -93,7 +69,7 @@ class Cart extends Component {
                 <BtnDecrement
                   type="button"
                   onClick={() =>
-                    this.handleDecrement(product.quantity, product.product.id)
+                    handleDecrement(product.quantity, product.product.id)
                   }
                 >
                   -

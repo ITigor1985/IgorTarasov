@@ -26,7 +26,28 @@ export const ImgProduct = styled.img`
 `;
 
 export const ProductListItemContainer = styled.li`
+  display: inline-block;
   padding: 16px;
+`;
+export const Overley = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(196, 196, 196, 0.247); ;
+`;
+
+export const OutOfStock = styled.p`
+  position: absolute;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 38px;
+  text-transform: uppercase;
+  color: #8d8f9a;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export const ProductName = styled.p`

@@ -42,6 +42,25 @@ class App extends Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.cleanEventListener);
   }
+
+  handleIncrement = (quantity, id) => {
+    const increment = quantity + 1;
+    const products = this.state.cartProduct.map(product => ({
+      ...product,
+      quantity: product.product.id === id ? increment : product.quantity,
+    }));
+    this.setState({ cartProduct: products });
+  };
+  handleDecrement = (quantity, id) => {
+    const decrement = quantity - 1;
+    if (decrement < 1) return;
+    const products = this.state.cartProduct.map(product => ({
+      ...product,
+      quantity: product.product.id === id ? decrement : product.quantity,
+    }));
+    this.setState({ cartProduct: products });
+  };
+
   setCurrencie = (label, symbol) => {
     this.setState({ currencie: label, symbol: symbol });
   };
@@ -133,7 +152,9 @@ class App extends Component {
                       <img src={cart} width={21} height={18} alt="cart" />
                       {this.state.cartProduct.length > 0 && (
                         <NumberOfGoods>
-                          {this.state.cartProduct.length}
+                          {this.state.cartProduct.reduce((total, item) => {
+                            return total + item.quantity;
+                          }, 0)}
                         </NumberOfGoods>
                       )}
                     </ContainerCartImage>
@@ -174,7 +195,9 @@ class App extends Component {
                 <Cart
                   currencie={this.state.currencie}
                   symbol={this.state.symbol}
-                  product={this.state.cartProduct}
+                  products={this.state.cartProduct}
+                  handleIncrement={this.handleIncrement}
+                  handleDecrement={this.handleDecrement}
                 />
               </Route>
             </Switch>
