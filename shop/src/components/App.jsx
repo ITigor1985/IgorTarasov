@@ -30,10 +30,16 @@ class App extends Component {
   state = {
     activCardIndex: null,
     cartProduct: [],
+    quantity: 0,
     currencie: 'USD',
     symbol: '$',
   };
-
+  componentDidMount() {
+    window.addEventListener('keydown', this.cleanEventListener);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.cleanEventListener);
+  }
   setCurrencie = (label, symbol) => {
     this.setState({ currencie: label, symbol: symbol });
   };
@@ -64,12 +70,6 @@ class App extends Component {
       firstNaturalSizeImage: bigImage,
     });
   };
-  componentDidMount() {
-    window.addEventListener('keydown', this.cleanEventListener);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.cleanEventListener);
-  }
 
   modalClose = event => {
     if (event.currentTarget !== event.target) return;

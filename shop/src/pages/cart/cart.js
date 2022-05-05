@@ -12,6 +12,8 @@ import {
   ProductBrand,
   ProductName,
   TitleCart,
+  Container,
+  Total,
 } from './cart.styled';
 
 class Cart extends Component {
@@ -39,25 +41,27 @@ class Cart extends Component {
   };
 
   allQuantityProducts(products) {
-    return products
+    const quantity = products
       .map(quantity => quantity.quantity)
       .flatMap(quantity => quantity);
+    return quantity;
   }
 
   setTotal = products => {
     const allPrice = products.map(product => product.product.prices);
+
     const filter = allPrice.map(prices =>
       prices.filter(price => price.currency.label === this.props.currencie)
     );
+
     const allAmount = filter
       .map(amounts => amounts.map(amount => amount.amount))
       .flatMap(amount => amount);
-
     const allQuantity = this.allQuantityProducts(products);
-
     const total = allAmount.reduce((sum, element, index) => {
       return sum + element * allQuantity[index];
     }, 0);
+
     return total.toFixed(2);
   };
 
@@ -101,21 +105,24 @@ class Cart extends Component {
             </ContainerCounterCarousel>
           </ContainerCart>
         ))}
-
-        <p>
-          Tax 21%: {this.props.symbol}
-          {((this.setTotal(products) / 100) * 21).toFixed(2)}
-        </p>
-        <p>
-          Quantity:{' '}
-          {this.allQuantityProducts(products).reduce(function (sum, elem) {
-            return sum + elem;
-          }, 0)}
-        </p>
-        <p>
-          Total: {this.props.symbol}
-          {this.setTotal(products)}
-        </p>
+        <Container>
+          <p>
+            Tax 21%: <Total>{this.props.symbol}</Total>
+            <Total>{((this.setTotal(products) / 100) * 21).toFixed(2)}</Total>
+          </p>
+          <p>
+            Quantity:{' '}
+            <Total>
+              {this.allQuantityProducts(products).reduce(function (sum, elem) {
+                return sum + elem;
+              }, 0)}
+            </Total>
+          </p>
+          <p>
+            Total: <Total>{this.props.symbol}</Total>
+            <Total>{this.setTotal(products)}</Total>
+          </p>
+        </Container>
       </>
     );
   }

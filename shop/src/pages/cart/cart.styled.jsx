@@ -67,3 +67,16 @@ export const BtnDecrement = styled.button`
   background-color: white;
   font-size: 25px;
 `;
+
+export const Container = styled.div`
+  border-top: 1px solid #e5e5e5;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+`;
+
+export const Total = styled.span`
+  font-weight: 700;
+`;
