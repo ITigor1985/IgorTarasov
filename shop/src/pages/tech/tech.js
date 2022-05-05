@@ -5,7 +5,13 @@ import ProductsListItem from 'components/ProductsListItem';
 
 class Tech extends Component {
   render() {
-    const { currencie, setActiveCard, activStyleCard, modalOpen } = this.props;
+    const {
+      currencie,
+      setActiveCard,
+      activStyleCard,
+      modalOpen,
+      setCartProduct,
+    } = this.props;
 
     return (
       <ul className="listCard">
@@ -25,6 +31,7 @@ class Tech extends Component {
                     currencie={currencie}
                     modalOpen={modalOpen}
                     key={product.id}
+                    setCartProduct={setCartProduct}
                   />
                 ));
               }

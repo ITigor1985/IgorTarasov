@@ -12,6 +12,8 @@ import {
   Header,
   ContainerCurrenciesCart,
   BtnCart,
+  ContainerCartImage,
+  NumberOfGoods,
 } from './App.styled';
 import logo from '../images/a-logo.svg';
 import cart from '../images/vector.svg';
@@ -56,6 +58,7 @@ class App extends Component {
     this.setState(prevState => ({
       cartProduct: [...prevState.cartProduct, product],
     }));
+    alert('product add to cart');
   };
 
   activStyleCard = index => {
@@ -126,7 +129,14 @@ class App extends Component {
                 />
                 <BtnCart type="button">
                   <Link to="/cart">
-                    <img src={cart} width={21} height={18} alt="cart" />
+                    <ContainerCartImage>
+                      <img src={cart} width={21} height={18} alt="cart" />
+                      {this.state.cartProduct.length > 0 && (
+                        <NumberOfGoods>
+                          {this.state.cartProduct.length}
+                        </NumberOfGoods>
+                      )}
+                    </ContainerCartImage>
                   </Link>
                 </BtnCart>
               </ContainerCurrenciesCart>
@@ -135,6 +145,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/all">
                 <All
+                  setCartProduct={this.setCartProduct}
                   currencie={this.state.currencie}
                   activStyleCard={this.activStyleCard}
                   setActiveCard={this.setActiveCard}
@@ -143,6 +154,7 @@ class App extends Component {
               </Route>
               <Route path="/clothes">
                 <Clothes
+                  setCartProduct={this.setCartProduct}
                   currencie={this.state.currencie}
                   activStyleCard={this.activStyleCard}
                   setActiveCard={this.setActiveCard}
@@ -151,6 +163,7 @@ class App extends Component {
               </Route>
               <Route path="/tech">
                 <Tech
+                  setCartProduct={this.setCartProduct}
                   currencie={this.state.currencie}
                   activStyleCard={this.activStyleCard}
                   setActiveCard={this.setActiveCard}

@@ -31,3 +31,23 @@ export const BtnCart = styled.button`
   background-color: white;
   border: none;
 `;
+
+export const ContainerCartImage = styled.div`
+  position: relative;
+`;
+export const NumberOfGoods = styled.span`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+  background-color: #1d1f22;
+  border-radius: 50%;
+  color: white;
+  top: -50%;
+  right: -50%;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+`;

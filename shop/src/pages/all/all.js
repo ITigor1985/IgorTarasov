@@ -6,7 +6,13 @@ import ProductsListItem from 'components/ProductsListItem';
 
 class All extends Component {
   render() {
-    const { currencie, setActiveCard, activStyleCard, modalOpen } = this.props;
+    const {
+      currencie,
+      setActiveCard,
+      activStyleCard,
+      modalOpen,
+      setCartProduct,
+    } = this.props;
     return (
       <ul className="listCard">
         <Query query={GET_CATEGORIES}>
@@ -25,6 +31,7 @@ class All extends Component {
                     currencie={currencie}
                     key={product.id}
                     modalOpen={modalOpen}
+                    setCartProduct={setCartProduct}
                   />
                 ));
               }

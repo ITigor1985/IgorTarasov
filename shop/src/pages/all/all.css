@@ -22,7 +22,5 @@
 .cart__visible {
   position: absolute;
   display: block;
-  right: 15px;
-  bottom: 100px;
   color: green;
 }

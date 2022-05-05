@@ -5,7 +5,13 @@ import ProductsListItem from 'components/ProductsListItem';
 
 class Clothes extends Component {
   render() {
-    const { currencie, setActiveCard, activStyleCard, modalOpen } = this.props;
+    const {
+      currencie,
+      setActiveCard,
+      activStyleCard,
+      modalOpen,
+      setCartProduct,
+    } = this.props;
 
     return (
       <ul className="listCard">
@@ -24,6 +30,7 @@ class Clothes extends Component {
                     currencie={currencie}
                     key={product.id}
                     modalOpen={modalOpen}
+                    setCartProduct={setCartProduct}
                   />
                 ));
               }

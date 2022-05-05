@@ -9,7 +9,17 @@ export const GET_CATEGORIES = gql`
         inStock
         name
         id
-
+        brand
+        attributes {
+          id
+          name
+          type
+          items {
+            displayValue
+            value
+            id
+          }
+        }
         category
         prices {
           currency {

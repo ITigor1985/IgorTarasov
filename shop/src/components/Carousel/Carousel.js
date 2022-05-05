@@ -46,14 +46,16 @@ class Carousel extends Component {
     const { product } = this.state;
     return (
       <CarouselCartProducts>
-        <ArrowPrev
-          type="button"
-          onClick={() =>
-            this.setPrevActiveImage(product.imageIndex, product.product.id)
-          }
-        >
-          <img src={arrowLeft} alt="arrow left" width={24} height={24} />
-        </ArrowPrev>
+        {product.product.gallery.length > 1 && (
+          <ArrowPrev
+            type="button"
+            onClick={() =>
+              this.setPrevActiveImage(product.imageIndex, product.product.id)
+            }
+          >
+            <img src={arrowLeft} alt="arrow left" width={24} height={24} />
+          </ArrowPrev>
+        )}
         <ContainerGallery>
           <ListGallery>
             {product.product.gallery.map(index => (
@@ -66,18 +68,20 @@ class Carousel extends Component {
             ))}
           </ListGallery>
         </ContainerGallery>
-        <ArrowNext
-          type="button"
-          onClick={() =>
-            this.setNextActiveImage(
-              product.imageIndex,
-              product.product.id,
-              product.product.gallery.length
-            )
-          }
-        >
-          <img src={arrowRight} alt="arrow left" width={24} height={24} />
-        </ArrowNext>
+        {product.product.gallery.length > 1 && (
+          <ArrowNext
+            type="button"
+            onClick={() =>
+              this.setNextActiveImage(
+                product.imageIndex,
+                product.product.id,
+                product.product.gallery.length
+              )
+            }
+          >
+            <img src={arrowRight} alt="arrow left" width={24} height={24} />
+          </ArrowNext>
+        )}
       </CarouselCartProducts>
     );
   }
