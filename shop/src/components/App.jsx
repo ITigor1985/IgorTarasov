@@ -113,8 +113,12 @@ class App extends Component {
   };
 
   openModalCart = () => {
-    this.setState(prevState => ({ modalCartOpen: !prevState.modalCartOpen }));
+    this.setState({ modalCartOpen: true });
     document.body.style.overflow = 'hidden';
+  };
+  closeModalCart = () => {
+    this.setState({ modalCartOpen: false });
+    document.body.style.overflow = 'visible';
   };
 
   cleanEventListener = e => {
@@ -172,6 +176,7 @@ class App extends Component {
                   symbol={this.state.symbol}
                   handleIncrement={this.handleIncrement}
                   handleDecrement={this.handleDecrement}
+                  closeModalCart={this.closeModalCart}
                 />
               )}
             </Header>

@@ -99,3 +99,42 @@ export const BtnDecrement = styled.button`
   background-color: white;
   font-size: 14px;
 `;
+export const ContainerTotal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+`;
+export const Total = styled.p`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+`;
+
+export const ContainerBtns = styled.ul`
+  display: flex;
+  justify-content: space-between;
+`;
+export const BtnBag = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 43px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  background-color: white;
+`;
+export const BtnCheckOut = styled.button`
+  border: none;
+  background-color: #5ece7b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 43px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+`;

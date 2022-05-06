@@ -51,3 +51,14 @@ export const NumberOfGoods = styled.span`
   font-size: 14px;
   line-height: 16px;
 `;
+
+export const BtnOrder = styled.button`
+  padding: 13px 116px;
+  background-color: #5ece7b;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  margin-bottom: 200px;
+`;

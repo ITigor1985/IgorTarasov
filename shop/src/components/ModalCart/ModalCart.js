@@ -1,4 +1,4 @@
-import { BrowserRouter as Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Attributes from 'components/Attributes';
 import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
@@ -17,12 +17,45 @@ import {
   Counter,
   BtnIncrement,
   BtnDecrement,
+  Total,
+  ContainerTotal,
+  ContainerBtns,
+  BtnBag,
+  BtnCheckOut,
 } from './ModalCart.styled';
 
 class ModalCart extends Component {
+  allQuantityProducts(products) {
+    const quantity = products
+      .map(quantity => quantity.quantity)
+      .flatMap(quantity => quantity);
+    return quantity;
+  }
+
+  setTotal = products => {
+    const allPrice = products.map(product => product.product.prices);
+    const filter = allPrice.map(prices =>
+      prices.filter(price => price.currency.label === this.props.currencie)
+    );
+
+    const allAmount = filter
+      .map(amounts => amounts.map(amount => amount.amount))
+      .flatMap(amount => amount);
+    const allQuantity = this.allQuantityProducts(products);
+    const total = allAmount.reduce((sum, element, index) => {
+      return sum + element * allQuantity[index];
+    }, 0);
+
+    return total.toFixed(2);
+  };
   render() {
-    const { currencie, handleIncrement, handleDecrement, products } =
-      this.props;
+    const {
+      currencie,
+      handleIncrement,
+      handleDecrement,
+      products,
+      closeModalCart,
+    } = this.props;
     const modalCart = 'modalCart';
     return (
       <>
@@ -77,16 +110,35 @@ class ModalCart extends Component {
                   </ContainerCounterCarousel>
                 </ContainerCart>
               ))}
-              <ul>
+              <ContainerTotal>
+                <Total>Total:</Total>
+                <Total>
+                  {this.props.symbol}
+                  {this.setTotal(products)}
+                </Total>
+              </ContainerTotal>
+              <ContainerBtns>
                 <li>
-                  <button type="button">
+                  <BtnBag
+                    type="button"
+                    onClick={() => {
+                      closeModalCart();
+                    }}
+                  >
                     <Link to="/cart">VIEW BAG</Link>
-                  </button>
+                  </BtnBag>
                 </li>
                 <li>
-                  <button type="button">CHECK OUT</button>
+                  <BtnCheckOut
+                    type="button"
+                    onClick={() => {
+                      closeModalCart();
+                    }}
+                  >
+                    CHECK OUT
+                  </BtnCheckOut>
                 </li>
-              </ul>
+              </ContainerBtns>
             </ModalCartContainer>
           </Container>
         </OverlayCart>

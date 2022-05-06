@@ -1,3 +1,4 @@
+import { BtnOrder } from 'components/App.styled';
 import Attributes from 'components/Attributes';
 import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
@@ -101,6 +102,7 @@ class Cart extends Component {
             <Total>{this.setTotal(products)}</Total>
           </p>
         </Container>
+        <BtnOrder>ORDER</BtnOrder>
       </main>
     );
   }
