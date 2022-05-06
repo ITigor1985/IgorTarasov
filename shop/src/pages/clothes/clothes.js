@@ -14,31 +14,33 @@ class Clothes extends Component {
     } = this.props;
 
     return (
-      <ul className="listCard">
-        <Query query={GET_CATEGORIES}>
-          {({ loading, data }) => {
-            if (loading) return 'Loading...';
-            const { categories } = data;
-            return categories.map(category => {
-              if (category.name === 'clothes') {
-                return category.products.map((product, index) => (
-                  <ProductsListItem
-                    product={product}
-                    index={index}
-                    setActiveCard={setActiveCard}
-                    activStyleCard={activStyleCard}
-                    currencie={currencie}
-                    key={product.id}
-                    modalOpen={modalOpen}
-                    setCartProduct={setCartProduct}
-                  />
-                ));
-              }
-              return null;
-            });
-          }}
-        </Query>
-      </ul>
+      <main>
+        <ul className="listCard">
+          <Query query={GET_CATEGORIES}>
+            {({ loading, data }) => {
+              if (loading) return 'Loading...';
+              const { categories } = data;
+              return categories.map(category => {
+                if (category.name === 'clothes') {
+                  return category.products.map((product, index) => (
+                    <ProductsListItem
+                      product={product}
+                      index={index}
+                      setActiveCard={setActiveCard}
+                      activStyleCard={activStyleCard}
+                      currencie={currencie}
+                      key={product.id}
+                      modalOpen={modalOpen}
+                      setCartProduct={setCartProduct}
+                    />
+                  ));
+                }
+                return null;
+              });
+            }}
+          </Query>
+        </ul>
+      </main>
     );
   }
 }

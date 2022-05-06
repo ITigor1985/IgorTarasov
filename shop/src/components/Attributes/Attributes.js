@@ -4,6 +4,7 @@ import {
   AtrributesListColorItem,
   AtrributesListCapacityItem,
   AtrributeName,
+  AttributeColor,
 } from './Attributes.styled.jsx';
 import './Attributes.css';
 
@@ -76,12 +77,12 @@ class Attributes extends Component {
             onClick={() => this.setActiveColorButon(index)}
             className={this.activStyleColorButton(index)}
           >
-            <div
-              className="attributeSize"
+            <AttributeColor
+              eventType={this.props.eventType}
               style={{
                 backgroundColor: item.value,
               }}
-            ></div>
+            ></AttributeColor>
           </AtrributesListColorItem>
         ));
 
@@ -91,6 +92,7 @@ class Attributes extends Component {
             key={item.id}
             onClick={() => this.setActiveCapacityButon(index)}
             className={this.activStyleCapacityButton(index)}
+            eventType={this.props.eventType}
           >
             {item.value}
           </AtrributesListCapacityItem>
@@ -101,6 +103,7 @@ class Attributes extends Component {
             key={item.id}
             onClick={() => this.setActiveUSBButon(index)}
             className={this.activStyleUSBButton(index)}
+            eventType={this.props.eventType}
           >
             {item.value}
           </AtrributesListCapacityItem>
@@ -111,6 +114,7 @@ class Attributes extends Component {
             key={item.id}
             onClick={() => this.setActiveTIDButon(index)}
             className={this.activStyleTIDButton(index)}
+            eventType={this.props.eventType}
           >
             {item.value}
           </AtrributesListCapacityItem>
@@ -121,6 +125,7 @@ class Attributes extends Component {
             key={item.id}
             onClick={() => this.setActiveSizeButon(index)}
             className={this.activStyleSizeButton(index)}
+            eventType={this.props.eventType}
           >
             {item.value}
           </AtrributesListCapacityItem>

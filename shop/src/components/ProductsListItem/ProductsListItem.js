@@ -21,7 +21,6 @@ const ProductsListItem = ({
   modalOpen,
   setCartProduct,
 }) => {
-  console.log(product);
   const quantity = 1;
   const imageIndex = 0;
   const select = (product, event) => {
@@ -56,7 +55,11 @@ const ProductsListItem = ({
             </AddToCart>
           </ContainerImg>
           <ProductName>{product.name}</ProductName>
-          <Currency product={product} currencie={currencie} />
+          <Currency
+            product={product}
+            currencie={currencie}
+            eventType="productCard"
+          />
         </ProductListItemContainer>
       ) : (
         <ProductListItemContainer className="card-out" value={index}>

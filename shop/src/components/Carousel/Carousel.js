@@ -44,8 +44,9 @@ class Carousel extends Component {
 
   render() {
     const { product } = this.state;
+    const { eventType } = this.props;
     return (
-      <CarouselCartProducts>
+      <CarouselCartProducts eventType={eventType}>
         {product.product.gallery.length > 1 && (
           <ArrowPrev
             type="button"
@@ -56,11 +57,12 @@ class Carousel extends Component {
             <img src={arrowLeft} alt="arrow left" width={24} height={24} />
           </ArrowPrev>
         )}
-        <ContainerGallery>
+        <ContainerGallery eventType={eventType}>
           <ListGallery>
             {product.product.gallery.map(index => (
               <ListGalleryItem key={index}>
                 <ProductImage
+                  eventType={eventType}
                   src={product.product.gallery[product.imageIndex]}
                   alt={product.product.name}
                 />

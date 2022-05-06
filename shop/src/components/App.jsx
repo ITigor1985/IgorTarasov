@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   NavLink,
 } from 'react-router-dom';
 import {
@@ -27,6 +26,7 @@ import Modal from './Modal';
 import Currencies from './Currencies';
 import { GlobalStyle } from 'GlobalStyled/GlobalStyled.styled';
 import './App.css';
+import ModalCart from './ModalCart';
 
 class App extends Component {
   state = {
@@ -35,6 +35,7 @@ class App extends Component {
     quantity: 0,
     currencie: 'USD',
     symbol: '$',
+    modalCartOpen: false,
   };
   componentDidMount() {
     window.addEventListener('keydown', this.cleanEventListener);
@@ -111,6 +112,11 @@ class App extends Component {
     document.body.style.overflow = 'visible';
   };
 
+  openModalCart = () => {
+    this.setState(prevState => ({ modalCartOpen: !prevState.modalCartOpen }));
+    document.body.style.overflow = 'hidden';
+  };
+
   cleanEventListener = e => {
     if (e.code === 'Escape') {
       this.modalCloseESC();
@@ -146,21 +152,28 @@ class App extends Component {
                   setCurrencie={this.setCurrencie}
                   symbol={this.state.symbol}
                 />
-                <BtnCart type="button">
-                  <Link to="/cart">
-                    <ContainerCartImage>
-                      <img src={cart} width={21} height={18} alt="cart" />
-                      {this.state.cartProduct.length > 0 && (
-                        <NumberOfGoods>
-                          {this.state.cartProduct.reduce((total, item) => {
-                            return total + item.quantity;
-                          }, 0)}
-                        </NumberOfGoods>
-                      )}
-                    </ContainerCartImage>
-                  </Link>
+                <BtnCart type="button" onClick={this.openModalCart}>
+                  <ContainerCartImage>
+                    <img src={cart} width={21} height={18} alt="cart" />
+                    {this.state.cartProduct.length > 0 && (
+                      <NumberOfGoods>
+                        {this.state.cartProduct.reduce((total, item) => {
+                          return total + item.quantity;
+                        }, 0)}
+                      </NumberOfGoods>
+                    )}
+                  </ContainerCartImage>
                 </BtnCart>
               </ContainerCurrenciesCart>
+              {this.state.modalCartOpen && (
+                <ModalCart
+                  products={this.state.cartProduct}
+                  currencie={this.state.currencie}
+                  symbol={this.state.symbol}
+                  handleIncrement={this.handleIncrement}
+                  handleDecrement={this.handleDecrement}
+                />
+              )}
             </Header>
 
             <Switch>
@@ -210,6 +223,7 @@ class App extends Component {
             currencie={this.state.currencie}
             setCartProduct={this.setCartProduct}
             onClick={this.modalClose}
+            symbol={this.state.symbol}
           />
         )}
         <GlobalStyle />

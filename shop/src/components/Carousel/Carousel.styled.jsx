@@ -1,5 +1,22 @@
 import styled from 'styled-components';
 
+const widthImg = ({ eventType }) => {
+  switch (eventType) {
+    case 'modalCart':
+      return '121px';
+    default:
+      return '200px';
+  }
+};
+const heightImg = ({ eventType }) => {
+  switch (eventType) {
+    case 'modalCart':
+      return '190px';
+    default:
+      return '288px';
+  }
+};
+
 export const ListGallery = styled.ul`
   width: 9999px;
   margin: 0;
@@ -15,20 +32,20 @@ export const ListGalleryItem = styled.li`
 
 export const ProductImage = styled.img`
   display: block;
-  height: 288px;
-  width: 200px;
+  height: ${heightImg};
+  width: ${widthImg};
   object-fit: contain;
 `;
 
 export const ContainerGallery = styled.div`
-  width: 200px;
+  width: ${widthImg};
   overflow: hidden;
 `;
 
 export const CarouselCartProducts = styled.div`
   position: relative;
   display: flex;
-  width: 200px;
+  width: ${widthImg};
 `;
 
 export const ArrowPrev = styled.button`

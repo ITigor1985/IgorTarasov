@@ -45,14 +45,18 @@ class Cart extends Component {
     const { currencie, handleIncrement, handleDecrement, products } =
       this.props;
     return (
-      <>
+      <main>
         <TitleCart>Cart</TitleCart>
         {products.map(product => (
           <ContainerCart key={product.product.id}>
             <ContainerDescription>
               <ProductBrand>{product.product.brand}</ProductBrand>
               <ProductName>{product.product.name}</ProductName>
-              <Currency product={product.product} currencie={currencie} />
+              <Currency
+                product={product.product}
+                currencie={currencie}
+                eventType="cart"
+              />
               <Attributes productAttributes={product.product.attributes} />
             </ContainerDescription>
             <ContainerCounterCarousel>
@@ -97,7 +101,7 @@ class Cart extends Component {
             <Total>{this.setTotal(products)}</Total>
           </p>
         </Container>
-      </>
+      </main>
     );
   }
 }
