@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Link } from 'react-router-dom';
 import Attributes from 'components/Attributes';
 import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
@@ -18,11 +18,10 @@ import {
   BtnIncrement,
   BtnDecrement,
 } from './ModalCart.styled';
-import Cart from 'pages/cart/cart';
 
 class ModalCart extends Component {
   render() {
-    const { currencie, handleIncrement, handleDecrement, products, symbol } =
+    const { currencie, handleIncrement, handleDecrement, products } =
       this.props;
     const modalCart = 'modalCart';
     return (
@@ -81,9 +80,7 @@ class ModalCart extends Component {
               <ul>
                 <li>
                   <button type="button">
-                    <Router>
-                      <Link to="/cart">VIEW BAG</Link>
-                    </Router>
+                    <Link to="/cart">VIEW BAG</Link>
                   </button>
                 </li>
                 <li>

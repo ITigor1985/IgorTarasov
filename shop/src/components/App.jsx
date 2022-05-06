@@ -223,7 +223,6 @@ class App extends Component {
             currencie={this.state.currencie}
             setCartProduct={this.setCartProduct}
             onClick={this.modalClose}
-            symbol={this.state.symbol}
           />
         )}
         <GlobalStyle />
