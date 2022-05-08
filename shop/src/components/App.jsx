@@ -63,6 +63,13 @@ class App extends Component {
     this.setState({ cartProduct: products });
   };
 
+  removeProduct = id => {
+    const products = this.state.cartProduct.filter(
+      product => product.product.id !== id
+    );
+    this.setState({ cartProduct: products });
+  };
+
   handleIncrement = (quantity, id) => {
     const increment = quantity + 1;
     const products = this.state.cartProduct.map(product => ({
@@ -236,6 +243,7 @@ class App extends Component {
                   handleIncrement={this.handleIncrement}
                   handleDecrement={this.handleDecrement}
                   setProducts={this.setProducts}
+                  removeProduct={this.removeProduct}
                 />
               </Route>
             </Switch>

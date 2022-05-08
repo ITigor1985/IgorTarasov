@@ -3,6 +3,7 @@ import Attributes from 'components/Attributes';
 import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   BtnDecrement,
   BtnIncrement,
@@ -15,6 +16,7 @@ import {
   TitleCart,
   Container,
   Total,
+  RemoveProduct,
 } from './cart.styled';
 
 class Cart extends Component {
@@ -43,8 +45,13 @@ class Cart extends Component {
   };
 
   render() {
-    const { currencie, handleIncrement, handleDecrement, products } =
-      this.props;
+    const {
+      currencie,
+      handleIncrement,
+      handleDecrement,
+      products,
+      removeProduct,
+    } = this.props;
     return (
       <main>
         <TitleCart>Cart</TitleCart>
@@ -59,6 +66,9 @@ class Cart extends Component {
                 eventType="cart"
               />
               <Attributes productAttributes={product.product.attributes} />
+              <RemoveProduct onClick={() => removeProduct(product.product.id)}>
+                delete
+              </RemoveProduct>
             </ContainerDescription>
             <ContainerCounterCarousel>
               <Counter>
@@ -102,7 +112,11 @@ class Cart extends Component {
             <Total>{this.setTotal(products)}</Total>
           </p>
         </Container>
-        <BtnOrder>ORDER</BtnOrder>
+        <BtnOrder>
+          <Link to="/all" style={{ color: 'white' }}>
+            ORDER
+          </Link>
+        </BtnOrder>
       </main>
     );
   }

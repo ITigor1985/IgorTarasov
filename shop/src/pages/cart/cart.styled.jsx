@@ -42,6 +42,17 @@ export const ProductPrice = styled.h3`
   margin-bottom: 10px;
 `;
 
+export const RemoveProduct = styled.button`
+  padding: 13px 116px;
+  background-color: #5ece7b;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  text-transform: uppercase;
+`;
+
 export const Counter = styled.div`
   display: flex;
   height: 288px;
