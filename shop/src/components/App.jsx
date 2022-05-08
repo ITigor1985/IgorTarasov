@@ -39,10 +39,29 @@ class App extends Component {
   };
   componentDidMount() {
     window.addEventListener('keydown', this.cleanEventListener);
+    const products = localStorage.getItem('products');
+    const parsedProducts = JSON.parse(products);
+
+    if (parsedProducts) {
+      this.setState({ cartProduct: parsedProducts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const nextProducts = this.state.cartProduct;
+    const prevProducts = prevState.cartProduct;
+
+    if (nextProducts !== prevProducts) {
+      localStorage.setItem('products', JSON.stringify(nextProducts));
+    }
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.cleanEventListener);
   }
+
+  setProducts = products => {
+    this.setState({ cartProduct: products });
+  };
 
   handleIncrement = (quantity, id) => {
     const increment = quantity + 1;
@@ -216,6 +235,7 @@ class App extends Component {
                   products={this.state.cartProduct}
                   handleIncrement={this.handleIncrement}
                   handleDecrement={this.handleDecrement}
+                  setProducts={this.setProducts}
                 />
               </Route>
             </Switch>
