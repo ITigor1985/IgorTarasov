@@ -27,6 +27,7 @@ import ModalCart from './ModalCart';
 import { GET_Categories } from 'query/query';
 import { Query } from '@apollo/client/react/components';
 import Child from 'pages/all/Child';
+import ProductPage from 'pages/ProductPage';
 
 class App extends Component {
   state = {
@@ -233,6 +234,14 @@ class App extends Component {
                   activStyleCard={this.activStyleCard}
                   setActiveCard={this.setActiveCard}
                   modalOpen={this.modalOpen}
+                />
+              </Route>
+              <Route path="/:id/:productId" children={<ProductPage />}>
+                <ProductPage
+                  productId={this.state.productId}
+                  bigImage={this.state.firstNaturalSizeImage}
+                  currencie={this.state.currencie}
+                  setCartProduct={this.setCartProduct}
                 />
               </Route>
               <Route path="/cart">

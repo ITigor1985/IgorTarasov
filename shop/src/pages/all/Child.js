@@ -5,11 +5,13 @@ import './all.css';
 import ProductsListItem from 'components/ProductsListItem';
 
 import { withRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 class Child extends Component {
   render() {
     const { location } = this.props;
-    const title = String(location.pathname.slice(1));
+    const title = location.pathname.slice(1);
+    const url = location.pathname;
 
     const {
       currencie,
@@ -25,18 +27,21 @@ class Child extends Component {
             {({ loading, data }) => {
               if (loading) return 'Loading...';
               const { category } = data;
-              console.log(category);
               return category.products.map((product, index) => (
-                <ProductsListItem
-                  product={product}
-                  index={index}
-                  setActiveCard={setActiveCard}
-                  activStyleCard={activStyleCard}
-                  currencie={currencie}
-                  key={product.id}
-                  modalOpen={modalOpen}
-                  setCartProduct={setCartProduct}
-                />
+                <>
+                  <NavLink to={`${url}/${product.id}`}>
+                    <ProductsListItem
+                      product={product}
+                      index={index}
+                      setActiveCard={setActiveCard}
+                      activStyleCard={activStyleCard}
+                      currencie={currencie}
+                      key={product.id}
+                      //modalOpen={modalOpen}
+                      setCartProduct={setCartProduct}
+                    />
+                  </NavLink>
+                </>
               ));
             }}
           </Query>

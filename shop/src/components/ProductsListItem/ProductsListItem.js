@@ -18,7 +18,7 @@ const ProductsListItem = ({
   index,
   currencie,
   activStyleCard,
-  modalOpen,
+
   setCartProduct,
 }) => {
   const quantity = 1;
@@ -27,14 +27,14 @@ const ProductsListItem = ({
     event.stopPropagation();
     if (product.attributes.length === 0) {
       setCartProduct({ product, quantity, imageIndex }, product.id);
-    } else modalOpen(product.id, product.gallery[0], event);
+    } else return;
   };
 
   return (
     <>
       {product.inStock ? (
         <ProductListItemContainer
-          onClick={event => modalOpen(product.id, product.gallery[0], event)}
+          //onClick={event => modalOpen(product.id, product.gallery[0], event)}
           className="card"
           onMouseOver={() => setActiveCard(index)}
           onMouseOut={() => setActiveCard(null)}
