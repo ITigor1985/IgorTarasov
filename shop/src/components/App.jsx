@@ -182,7 +182,7 @@ class App extends Component {
                     if (loading) return 'Loading...';
                     const { categories } = data;
                     return categories.map(({ name }) => (
-                      <LinkListItem>
+                      <LinkListItem key={name}>
                         <NavLink to={`/${name}`} activeClassName="active">
                           {name}
                         </NavLink>
