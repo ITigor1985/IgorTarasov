@@ -18,15 +18,15 @@ import logo from '../images/a-logo.svg';
 import cart from '../images/vector.svg';
 
 import { Component } from 'react';
-import All from 'pages/all/all';
-import Clothes from 'pages/clothes/clothes';
-import Tech from 'pages/tech/tech';
 import Cart from 'pages/cart/cart';
 import Modal from './Modal';
 import Currencies from './Currencies';
 import { GlobalStyle } from 'GlobalStyled/GlobalStyled.styled';
 import './App.css';
 import ModalCart from './ModalCart';
+import { GET_Categories } from 'query/query';
+import { Query } from '@apollo/client/react/components';
+import Child from 'pages/all/Child';
 
 class App extends Component {
   state = {
@@ -177,21 +177,19 @@ class App extends Component {
           <div>
             <Header>
               <LinkList>
-                <LinkListItem>
-                  <NavLink to="/all" activeClassName="active">
-                    All
-                  </NavLink>
-                </LinkListItem>
-                <LinkListItem>
-                  <NavLink to="/clothes" activeClassName="active">
-                    Clothes
-                  </NavLink>
-                </LinkListItem>
-                <LinkListItem>
-                  <NavLink to="/tech" activeClassName="active">
-                    Tech
-                  </NavLink>
-                </LinkListItem>
+                <Query query={GET_Categories}>
+                  {({ loading, data }) => {
+                    if (loading) return 'Loading...';
+                    const { categories } = data;
+                    return categories.map(({ name }) => (
+                      <LinkListItem>
+                        <NavLink to={`/${name}`} activeClassName="active">
+                          {name}
+                        </NavLink>
+                      </LinkListItem>
+                    ));
+                  }}
+                </Query>
               </LinkList>
               <img src={logo} alt="logo" width={41} height={41} />
               <ContainerCurrenciesCart>
@@ -228,26 +226,8 @@ class App extends Component {
             </Header>
 
             <Switch>
-              <Route exact path="/all">
-                <All
-                  setCartProduct={this.setCartProduct}
-                  currencie={this.state.currencie}
-                  activStyleCard={this.activStyleCard}
-                  setActiveCard={this.setActiveCard}
-                  modalOpen={this.modalOpen}
-                />
-              </Route>
-              <Route path="/clothes">
-                <Clothes
-                  setCartProduct={this.setCartProduct}
-                  currencie={this.state.currencie}
-                  activStyleCard={this.activStyleCard}
-                  setActiveCard={this.setActiveCard}
-                  modalOpen={this.modalOpen}
-                />
-              </Route>
-              <Route path="/tech">
-                <Tech
+              <Route exact path="/:id">
+                <Child
                   setCartProduct={this.setCartProduct}
                   currencie={this.state.currencie}
                   activStyleCard={this.activStyleCard}
