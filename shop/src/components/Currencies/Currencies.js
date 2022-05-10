@@ -10,23 +10,41 @@ import {
 } from './Currencies.styled';
 
 class Currencies extends Component {
-  state = {
-    dropCurrenciesMenu: false,
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  /**
+   * Set the wrapper ref
+   */
+  setWrapperRef = node => {
+    console.log(node);
+    this.wrapperRef = node;
   };
 
-  toggle = () => {
-    this.setState(prevState => ({
-      dropCurrenciesMenu: !prevState.dropCurrenciesMenu,
-    }));
+  /**
+   * Alert if clicked on outside of element
+   */
+  handleClickOutside = event => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.props.toggle(event);
+    }
   };
 
   render() {
     const { setCurrencie, symbol } = this.props;
     return (
       <Container>
-        <BtnCurrenciesSelection type="button" onClick={this.toggle}>
+        <BtnCurrenciesSelection
+          type="button"
+          onClick={event => this.props.toggle(event)}
+        >
           <Symbol>{symbol}</Symbol>
-          {this.state.dropCurrenciesMenu ? (
+          {this.props.dropCurrenciesMenu ? (
             <svg width="6" height="3" viewBox="0 0 42 25">
               <path
                 d="M3 3 L21 21 L39 3"
@@ -48,8 +66,8 @@ class Currencies extends Component {
             </svg>
           )}
         </BtnCurrenciesSelection>
-        {this.state.dropCurrenciesMenu && (
-          <ContainerCurrencyDropDown>
+        {this.props.dropCurrenciesMenu && (
+          <ContainerCurrencyDropDown ref={this.setWrapperRef}>
             <Query query={GET_CURRENCIES}>
               {({ loading, data }) => {
                 if (loading) return 'Loading...';
@@ -57,7 +75,9 @@ class Currencies extends Component {
                 return currencies.map(({ label, symbol }) => (
                   <BtnCurrency
                     type="button"
-                    onClick={() => setCurrencie(label, symbol)}
+                    onClick={event =>
+                      setCurrencie(label, symbol, event.currentTarget, event)
+                    }
                     key={label}
                   >
                     {label}

@@ -23,7 +23,7 @@ export const BtnCurrency = styled.button`
   background-color: white;
   border: none;
   padding: 8px 38px 8px 20px;
-  :nth-child(2n) {
+  :hover {
     background-color: #eeeeee;
   }
   :last-child {

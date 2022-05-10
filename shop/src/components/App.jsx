@@ -36,9 +36,11 @@ class App extends Component {
     currencie: 'USD',
     symbol: '$',
     modalCartOpen: false,
+    dropCurrenciesMenu: false,
   };
   componentDidMount() {
     window.addEventListener('keydown', this.cleanEventListener);
+
     const products = localStorage.getItem('products');
     const parsedProducts = JSON.parse(products);
 
@@ -88,8 +90,23 @@ class App extends Component {
     this.setState({ cartProduct: products });
   };
 
-  setCurrencie = (label, symbol) => {
+  setCurrencie = (label, symbol, currentTarget, e) => {
     this.setState({ currencie: label, symbol: symbol });
+    if (currentTarget === e.target) {
+      this.setState(prevState => ({
+        dropCurrenciesMenu: !prevState.dropCurrenciesMenu,
+      }));
+    }
+  };
+
+  toggle = event => {
+    console.log(event.currentTarget);
+    console.log(event.target);
+    if (event.currentTarget !== event.target) {
+      this.setState(prevState => ({
+        dropCurrenciesMenu: !prevState.dropCurrenciesMenu,
+      }));
+    }
   };
 
   setCartProduct = (product, id) => {
@@ -181,6 +198,9 @@ class App extends Component {
                 <Currencies
                   setCurrencie={this.setCurrencie}
                   symbol={this.state.symbol}
+                  dropCurrenciesMenu={this.state.dropCurrenciesMenu}
+                  toggle={this.toggle}
+                  closeCurrenciesDropDown={this.closeCurrenciesDropDown}
                 />
                 <BtnCart type="button" onClick={this.openModalCart}>
                   <ContainerCartImage>
