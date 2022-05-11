@@ -11,13 +11,16 @@ import {
   Container,
   ContainerDescription,
   ContainerModalBigImage,
+  ContainerProduct,
   ListGallery,
   ListGalleryItem,
   ModalBigImage,
   ProductBrand,
   ProductName,
   ProductPrice,
+  BtnAddToCartDisabled,
 } from './ProductPage.styled';
+import { OutOfStock } from 'components/ProductsListItem/ProductsListItem.styled';
 
 class ProductPage extends Component {
   state = {
@@ -40,8 +43,9 @@ class ProductPage extends Component {
           {({ data, loading }) => {
             if (loading) return 'Loading...';
             const { product } = data;
+            console.log(product);
             return (
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <ContainerProduct>
                 <ListGallery>
                   {product.gallery.map((image, index) => (
                     <ListGalleryItem
@@ -59,6 +63,7 @@ class ProductPage extends Component {
                 </ListGallery>
 
                 <ContainerModalBigImage>
+                  {!product.inStock && <OutOfStock>Out Of Stock</OutOfStock>}
                   {this.state.bigImage === '' ? (
                     <ModalBigImage
                       src={product.gallery[0]}
@@ -78,21 +83,27 @@ class ProductPage extends Component {
                   <ProductPrice>Price:</ProductPrice>
                   <Currency product={product} currencie={currencie} />
 
-                  <BtnAddToCart
-                    type="button"
-                    onClick={() =>
-                      setCartProduct(
-                        { product, quantity, imageIndex },
-                        product.id
-                      )
-                    }
-                  >
-                    ADD TO CART
-                  </BtnAddToCart>
+                  {product.inStock ? (
+                    <BtnAddToCart
+                      type="button"
+                      onClick={() =>
+                        setCartProduct(
+                          { product, quantity, imageIndex },
+                          product.id
+                        )
+                      }
+                    >
+                      ADD TO CART
+                    </BtnAddToCart>
+                  ) : (
+                    <BtnAddToCartDisabled type="button" disabled>
+                      ADD TO CART
+                    </BtnAddToCartDisabled>
+                  )}
 
                   <Interweave content={product.description} />
                 </ContainerDescription>
-              </div>
+              </ContainerProduct>
             );
           }}
         </Query>

@@ -37,6 +37,7 @@ export const ProductName = styled.p`
 `;
 
 export const ContainerModalBigImage = styled.div`
+  position: relative;
   margin-right: 100px;
 `;
 
@@ -60,6 +61,13 @@ export const BtnAddToCart = styled.button`
   background-color: #5ece7b;
   border: none;
 `;
+export const BtnAddToCartDisabled = styled.button`
+  padding: 16px 93px;
+  margin-bottom: 40px;
+  color: white;
+  background-color: #cacaca;
+  border: none;
+`;
 
 export const ProductDescription = styled.p`
   min-height: 50px;
@@ -68,4 +76,9 @@ export const ProductDescription = styled.p`
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
+`;
+
+export const ContainerProduct = styled.div`
+  display: flex;
+  align-items: start;
 `;
