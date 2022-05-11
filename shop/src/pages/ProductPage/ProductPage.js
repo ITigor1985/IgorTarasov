@@ -3,6 +3,7 @@ import Attributes from 'components/Attributes';
 import Currency from 'components/Currency';
 import { GET_PRODUCT } from 'query/query';
 import { Component } from 'react';
+import DOMPurify from 'dompurify';
 
 import { withRouter } from 'react-router-dom';
 import {
@@ -29,7 +30,7 @@ class ProductPage extends Component {
   };
 
   cleanString(string) {
-    return { __html: string };
+    return DOMPurify.sanitize(string);
   }
 
   render() {
@@ -94,9 +95,7 @@ class ProductPage extends Component {
                     ADD TO CART
                   </BtnAddToCart>
                   <ProductDescription
-                    dangerouslySetInnerHTML={this.cleanString(
-                      product.description
-                    )}
+                    description={this.cleanString(product.description)}
                   ></ProductDescription>
                 </ContainerDescription>
               </div>
