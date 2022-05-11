@@ -174,7 +174,6 @@ class App extends Component {
   render() {
     return (
       <Container>
-        {console.log(this.state.cartProduct)}
         <Router>
           <div>
             <Header>
