@@ -137,38 +137,16 @@ class App extends Component {
     this.setState({ activCardIndex: index });
   };
 
-  modalOpen = (id, bigImage, event) => {
-    event.preventDefault();
-    document.body.style.overflow = 'hidden';
-    this.setState({
-      productId: id,
-      firstNaturalSizeImage: bigImage,
-    });
+  toggleModalCart = () => {
+    this.setState(prevState => ({ modalCartOpen: !prevState.modalCartOpen }));
+    this.state.modalCartOpen
+      ? (document.body.style.overflow = 'visible')
+      : (document.body.style.overflow = 'hidden');
   };
-
-  modalClose = event => {
-    if (event.currentTarget !== event.target) return;
-    this.setState({ productId: '', firstNaturalSizeImage: '' });
+  closeModalCart = event => {
+    if (event.currentTarget === event.target)
+      this.setState({ modalCartOpen: false });
     document.body.style.overflow = 'visible';
-  };
-  modalCloseESC = () => {
-    this.setState({ productId: '', firstNaturalSizeImage: '' });
-    document.body.style.overflow = 'visible';
-  };
-
-  openModalCart = () => {
-    this.setState({ modalCartOpen: true });
-    document.body.style.overflow = 'hidden';
-  };
-  closeModalCart = () => {
-    this.setState({ modalCartOpen: false });
-    document.body.style.overflow = 'visible';
-  };
-
-  cleanEventListener = e => {
-    if (e.code === 'Escape') {
-      this.modalCloseESC();
-    }
   };
 
   render() {
@@ -201,7 +179,7 @@ class App extends Component {
                   toggle={this.toggle}
                   closeCurrenciesDropDown={this.closeCurrenciesDropDown}
                 />
-                <BtnCart type="button" onClick={this.openModalCart}>
+                <BtnCart type="button" onClick={this.toggleModalCart}>
                   <ContainerCartImage>
                     <img src={cart} width={21} height={18} alt="cart" />
                     {this.state.cartProduct.length > 0 && (
@@ -222,6 +200,7 @@ class App extends Component {
                   handleIncrement={this.handleIncrement}
                   handleDecrement={this.handleDecrement}
                   closeModalCart={this.closeModalCart}
+                  removeProduct={this.removeProduct}
                 />
               )}
             </Header>
@@ -249,7 +228,6 @@ class App extends Component {
                   modalOpen={this.modalOpen}
                 />
               </Route>
-
               <Route path="/:id/:productId" children={<ProductPage />}>
                 <ProductPage
                   productId={this.state.productId}
@@ -261,15 +239,6 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-        {/* {this.state.productId && this.state.firstNaturalSizeImage && (
-          <Modal
-            productId={this.state.productId}
-            bigImage={this.state.firstNaturalSizeImage}
-            currencie={this.state.currencie}
-            setCartProduct={this.setCartProduct}
-            onClick={this.modalClose}
-          />
-        )} */}
         <GlobalStyle />
       </Container>
     );

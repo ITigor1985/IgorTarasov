@@ -44,6 +44,7 @@ export const QuantityItems = styled.span`
 `;
 
 export const ContainerCart = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 24px 0px;
@@ -137,4 +138,12 @@ export const BtnCheckOut = styled.button`
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
+`;
+
+export const BtnRemoveProduct = styled.button`
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  background-color: inherit;
+  border: none;
 `;

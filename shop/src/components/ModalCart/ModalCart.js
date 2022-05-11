@@ -21,8 +21,10 @@ import {
   ContainerBtns,
   BtnBag,
   BtnCheckOut,
+  BtnRemoveProduct,
 } from './ModalCart.styled';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { AiOutlineClose } from 'react-icons/ai';
 
 class ModalCart extends Component {
   allQuantityProducts(products) {
@@ -55,12 +57,13 @@ class ModalCart extends Component {
       handleDecrement,
       products,
       closeModalCart,
+      removeProduct,
     } = this.props;
     const modalCart = 'modalCart';
     return (
       <>
-        <OverlayCart>
-          <Container>
+        <OverlayCart onClick={closeModalCart}>
+          <Container onClick={closeModalCart}>
             <ModalCartContainer>
               <MyBag>
                 My Bag,{' '}
@@ -108,6 +111,12 @@ class ModalCart extends Component {
                     </Counter>
                     <Carousel product={product} eventType="modalCart" />
                   </ContainerCounterCarousel>
+                  <BtnRemoveProduct
+                    type="button"
+                    onClick={() => removeProduct(product.product.id)}
+                  >
+                    <AiOutlineClose />
+                  </BtnRemoveProduct>
                 </ContainerCart>
               ))}
               <ContainerTotal>
@@ -121,22 +130,15 @@ class ModalCart extends Component {
                 <li>
                   <BtnBag
                     type="button"
-                    onClick={() => {
-                      closeModalCart();
-                    }}
+                    onClick={event => closeModalCart(event)}
                   >
-                    <NavLink to="/cart">VIEW BAG</NavLink>
+                    <Link to="/cart" onClick={event => closeModalCart(event)}>
+                      VIEW BAG
+                    </Link>
                   </BtnBag>
                 </li>
                 <li>
-                  <BtnCheckOut
-                    type="button"
-                    onClick={() => {
-                      closeModalCart();
-                    }}
-                  >
-                    CHECK OUT
-                  </BtnCheckOut>
+                  <BtnCheckOut type="button">CHECK OUT</BtnCheckOut>
                 </li>
               </ContainerBtns>
             </ModalCartContainer>
