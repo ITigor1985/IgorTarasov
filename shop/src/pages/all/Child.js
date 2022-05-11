@@ -7,11 +7,15 @@ import ProductsListItem from 'components/ProductsListItem';
 
 class Child extends Component {
   render() {
-    const { location } = this.props;
+    const {
+      currencie,
+      setActiveCard,
+      activStyleCard,
+      setCartProduct,
+      location,
+    } = this.props;
     const title = location.pathname.slice(1);
 
-    const { currencie, setActiveCard, activStyleCard, setCartProduct } =
-      this.props;
     return (
       <main>
         <ul className="listCard">

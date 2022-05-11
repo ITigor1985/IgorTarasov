@@ -228,16 +228,7 @@ class App extends Component {
             </Header>
 
             <Switch>
-              <Route exact path="/:id">
-                <Child
-                  setCartProduct={this.setCartProduct}
-                  currencie={this.state.currencie}
-                  activStyleCard={this.activStyleCard}
-                  setActiveCard={this.setActiveCard}
-                  modalOpen={this.modalOpen}
-                />
-              </Route>
-              <Route path="/cart">
+              <Route exact path="/cart">
                 {this.state.cartProduct && (
                   <Cart
                     currencie={this.state.currencie}
@@ -250,6 +241,16 @@ class App extends Component {
                   />
                 )}
               </Route>
+              <Route exact path="/:id">
+                <Child
+                  setCartProduct={this.setCartProduct}
+                  currencie={this.state.currencie}
+                  activStyleCard={this.activStyleCard}
+                  setActiveCard={this.setActiveCard}
+                  modalOpen={this.modalOpen}
+                />
+              </Route>
+
               <Route path="/:id/:productId" children={<ProductPage />}>
                 <ProductPage
                   productId={this.state.productId}

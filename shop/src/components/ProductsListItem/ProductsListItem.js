@@ -71,13 +71,20 @@ class ProductsListItem extends Component {
             </NavLink>
           </ProductListItemContainer>
         ) : (
-          <ProductListItemContainer className="card-out" value={index}>
+          <ProductListItemContainer
+            className=" card card-out"
+            value={index}
+            onMouseOver={() => setActiveCard(index)}
+            onMouseOut={() => setActiveCard(null)}
+          >
             <NavLink to={`${url}/${product.id}`}>
               <ContainerImg>
                 <ImgProduct src={product.gallery[0]} alt={product.name} />
                 <OutOfStock>Out Of Stock</OutOfStock>
               </ContainerImg>
-              <ProductName>{product.name}</ProductName>
+              <ProductName>
+                {product.brand} {product.name}
+              </ProductName>
               <Currency
                 style={{ fontSize: '18px', fontWaight: '500' }}
                 product={product}

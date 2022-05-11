@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import Attributes from 'components/Attributes';
 import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
@@ -23,6 +22,7 @@ import {
   BtnBag,
   BtnCheckOut,
 } from './ModalCart.styled';
+import { NavLink } from 'react-router-dom';
 
 class ModalCart extends Component {
   allQuantityProducts(products) {
