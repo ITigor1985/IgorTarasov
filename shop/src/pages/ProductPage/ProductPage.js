@@ -3,7 +3,7 @@ import Attributes from 'components/Attributes';
 import Currency from 'components/Currency';
 import { GET_PRODUCT } from 'query/query';
 import { Component } from 'react';
-import DOMPurify from 'dompurify';
+import { Interweave } from 'interweave';
 
 import { withRouter } from 'react-router-dom';
 import {
@@ -28,10 +28,6 @@ class ProductPage extends Component {
   setImage = image => {
     this.setState({ bigImage: image });
   };
-
-  cleanString(string) {
-    return DOMPurify.sanitize(string);
-  }
 
   render() {
     const { currencie, setCartProduct, match } = this.props;
@@ -94,9 +90,9 @@ class ProductPage extends Component {
                   >
                     ADD TO CART
                   </BtnAddToCart>
-                  <ProductDescription
-                    description={this.cleanString(product.description)}
-                  ></ProductDescription>
+                  <ProductDescription>
+                    <Interweave content={product.description} />
+                  </ProductDescription>
                 </ContainerDescription>
               </div>
             );
