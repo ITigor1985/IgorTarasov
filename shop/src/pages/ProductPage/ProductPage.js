@@ -15,7 +15,6 @@ import {
   ListGalleryItem,
   ModalBigImage,
   ProductBrand,
-  ProductDescription,
   ProductName,
   ProductPrice,
 } from './ProductPage.styled';
@@ -41,6 +40,7 @@ class ProductPage extends Component {
           {({ data, loading }) => {
             if (loading) return 'Loading...';
             const { product } = data;
+            console.log(product);
             return (
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <ListGallery>
@@ -90,9 +90,8 @@ class ProductPage extends Component {
                   >
                     ADD TO CART
                   </BtnAddToCart>
-                  <ProductDescription>
-                    <Interweave content={product.description} />
-                  </ProductDescription>
+
+                  <Interweave content={product.description} />
                 </ContainerDescription>
               </div>
             );

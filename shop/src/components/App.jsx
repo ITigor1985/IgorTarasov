@@ -174,6 +174,7 @@ class App extends Component {
   render() {
     return (
       <Container>
+        {console.log(this.state.cartProduct)}
         <Router>
           <div>
             <Header>
@@ -236,23 +237,25 @@ class App extends Component {
                   modalOpen={this.modalOpen}
                 />
               </Route>
+              <Route path="/cart">
+                {this.state.cartProduct && (
+                  <Cart
+                    currencie={this.state.currencie}
+                    symbol={this.state.symbol}
+                    products={this.state.cartProduct}
+                    handleIncrement={this.handleIncrement}
+                    handleDecrement={this.handleDecrement}
+                    setProducts={this.setProducts}
+                    removeProduct={this.removeProduct}
+                  />
+                )}
+              </Route>
               <Route path="/:id/:productId" children={<ProductPage />}>
                 <ProductPage
                   productId={this.state.productId}
                   bigImage={this.state.firstNaturalSizeImage}
                   currencie={this.state.currencie}
                   setCartProduct={this.setCartProduct}
-                />
-              </Route>
-              <Route path="/cart">
-                <Cart
-                  currencie={this.state.currencie}
-                  symbol={this.state.symbol}
-                  products={this.state.cartProduct}
-                  handleIncrement={this.handleIncrement}
-                  handleDecrement={this.handleDecrement}
-                  setProducts={this.setProducts}
-                  removeProduct={this.removeProduct}
                 />
               </Route>
             </Switch>

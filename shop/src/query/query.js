@@ -43,6 +43,7 @@ export const Get_category_products = gql`
         name
         id
         brand
+        description
         attributes {
           id
           name
@@ -97,6 +98,7 @@ export const GET_PRODUCT = gql`
       }
       gallery
       name
+      inStock
       description
       category
       prices {

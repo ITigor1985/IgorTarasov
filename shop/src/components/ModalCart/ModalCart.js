@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Attributes from 'components/Attributes';
 import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
@@ -125,7 +125,7 @@ class ModalCart extends Component {
                       closeModalCart();
                     }}
                   >
-                    <Link to="/cart">VIEW BAG</Link>
+                    <NavLink to="/cart">VIEW BAG</NavLink>
                   </BtnBag>
                 </li>
                 <li>

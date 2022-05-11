@@ -1,17 +1,14 @@
-import { Query } from '@apollo/client/react/components';
-import { Get_category_products } from 'query/query';
 import { Component } from 'react';
+import { Query } from '@apollo/client/react/components';
+import { withRouter } from 'react-router';
+import { Get_category_products } from 'query/query';
 import './all.css';
 import ProductsListItem from 'components/ProductsListItem';
-
-import { withRouter } from 'react-router';
-import { NavLink } from 'react-router-dom';
 
 class Child extends Component {
   render() {
     const { location } = this.props;
     const title = location.pathname.slice(1);
-    const url = location.pathname;
 
     const { currencie, setActiveCard, activStyleCard, setCartProduct } =
       this.props;
@@ -23,20 +20,15 @@ class Child extends Component {
               if (loading) return 'Loading...';
               const { category } = data;
               return category.products.map((product, index) => (
-                <>
-                  <NavLink to={`${url}/${product.id}`}>
-                    <ProductsListItem
-                      product={product}
-                      index={index}
-                      setActiveCard={setActiveCard}
-                      activStyleCard={activStyleCard}
-                      currencie={currencie}
-                      key={product.id}
-                      //modalOpen={modalOpen}
-                      setCartProduct={setCartProduct}
-                    />
-                  </NavLink>
-                </>
+                <ProductsListItem
+                  product={product}
+                  index={index}
+                  key={product.id}
+                  setActiveCard={setActiveCard}
+                  activStyleCard={activStyleCard}
+                  currencie={currencie}
+                  setCartProduct={setCartProduct}
+                />
               ));
             }}
           </Query>
