@@ -43,7 +43,6 @@ class ProductPage extends Component {
           {({ data, loading }) => {
             if (loading) return 'Loading...';
             const { product } = data;
-            console.log(product);
             return (
               <ContainerProduct>
                 <ListGallery>

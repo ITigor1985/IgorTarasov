@@ -109,11 +109,13 @@ class App extends Component {
     const existingProduct = this.state.cartProduct.some(
       prod => prod.product.id === id
     );
-
+    console.log(product);
     if (existingProduct) {
-      alert('this product is in the cart');
+      product.quantity = product.quantity + 1;
+      console.log(product);
       return;
     }
+    console.log(product);
     this.setState(prevState => ({
       cartProduct: [...prevState.cartProduct, product],
     }));

@@ -17,7 +17,6 @@ import imageCart from '../../images/cart.svg';
 
 class ProductsListItem extends Component {
   select = (product, event) => {
-    event.stopPropagation();
     if (product.attributes.length === 0) {
       const quantity = 1;
       const imageIndex = 0;
@@ -86,7 +85,7 @@ class ProductsListItem extends Component {
                 {product.brand} {product.name}
               </ProductName>
               <Currency
-                style={{ fontSize: '18px', fontWaight: '500' }}
+                eventType="productCard"
                 product={product}
                 currencie={currencie}
               />
