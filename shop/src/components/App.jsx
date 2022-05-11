@@ -40,8 +40,6 @@ class App extends Component {
     dropCurrenciesMenu: false,
   };
   componentDidMount() {
-    window.addEventListener('keydown', this.cleanEventListener);
-
     const products = localStorage.getItem('products');
     const parsedProducts = JSON.parse(products);
 
@@ -57,9 +55,6 @@ class App extends Component {
     if (nextProducts !== prevProducts) {
       localStorage.setItem('products', JSON.stringify(nextProducts));
     }
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.cleanEventListener);
   }
 
   setProducts = products => {
