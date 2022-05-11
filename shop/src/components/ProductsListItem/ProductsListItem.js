@@ -54,7 +54,10 @@ const ProductsListItem = ({
               />
             </AddToCart>
           </ContainerImg>
-          <ProductName>{product.name}</ProductName>
+
+          <ProductName>
+            {product.brand} {product.name}
+          </ProductName>
           <Currency
             product={product}
             currencie={currencie}

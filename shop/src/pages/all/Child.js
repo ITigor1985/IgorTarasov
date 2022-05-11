@@ -13,13 +13,8 @@ class Child extends Component {
     const title = location.pathname.slice(1);
     const url = location.pathname;
 
-    const {
-      currencie,
-      setActiveCard,
-      activStyleCard,
-      modalOpen,
-      setCartProduct,
-    } = this.props;
+    const { currencie, setActiveCard, activStyleCard, setCartProduct } =
+      this.props;
     return (
       <main>
         <ul className="listCard">

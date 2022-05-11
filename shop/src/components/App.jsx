@@ -19,7 +19,7 @@ import cart from '../images/vector.svg';
 
 import { Component } from 'react';
 import Cart from 'pages/cart/cart';
-import Modal from './Modal';
+//import Modal from './Modal';
 import Currencies from './Currencies';
 import { GlobalStyle } from 'GlobalStyled/GlobalStyled.styled';
 import './App.css';
@@ -258,7 +258,7 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-        {this.state.productId && this.state.firstNaturalSizeImage && (
+        {/* {this.state.productId && this.state.firstNaturalSizeImage && (
           <Modal
             productId={this.state.productId}
             bigImage={this.state.firstNaturalSizeImage}
@@ -266,7 +266,7 @@ class App extends Component {
             setCartProduct={this.setCartProduct}
             onClick={this.modalClose}
           />
-        )}
+        )} */}
         <GlobalStyle />
       </Container>
     );
