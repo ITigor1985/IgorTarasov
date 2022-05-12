@@ -54,7 +54,7 @@ class Attributes extends Component {
   };
 
   setActiveColorButon = index => {
-    this.setState({ activColorIndex: index });
+    this.setState({ name: index });
   };
   setActiveCapacityButon = index => {
     this.setState({ activCapacityIndex: index });
@@ -80,7 +80,6 @@ class Attributes extends Component {
             <AttributeColor
               eventType={this.props.eventType}
               bgColor={item.value}
-              
             ></AttributeColor>
           </AtrributesListColorItem>
         ));
@@ -137,6 +136,7 @@ class Attributes extends Component {
 
   render() {
     const { productAttributes } = this.props;
+    console.log(productAttributes);
     return (
       <>
         {productAttributes.map(attribute => (
