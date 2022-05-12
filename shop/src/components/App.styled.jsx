@@ -61,4 +61,5 @@ export const BtnOrder = styled.button`
   line-height: 17px;
   border: none;
   margin-bottom: 200px;
+  cursor: pointer;
 `;

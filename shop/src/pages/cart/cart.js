@@ -3,7 +3,6 @@ import Attributes from 'components/Attributes';
 import Carousel from 'components/Carousel';
 import Currency from 'components/Currency';
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {
   BtnDecrement,
   BtnIncrement,
@@ -17,6 +16,7 @@ import {
   Container,
   Total,
   RemoveProduct,
+  BtnLink,
 } from './cart.styled';
 
 class Cart extends Component {
@@ -112,11 +112,9 @@ class Cart extends Component {
             <Total>{this.setTotal(products)}</Total>
           </p>
         </Container>
-        <BtnOrder>
-          <Link to="/all" style={{ color: 'white' }}>
-            ORDER
-          </Link>
-        </BtnOrder>
+        <BtnLink to="/all">
+          <BtnOrder>ORDER</BtnOrder>
+        </BtnLink>
       </main>
     );
   }

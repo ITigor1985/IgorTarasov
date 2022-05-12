@@ -106,20 +106,39 @@ class App extends Component {
   };
 
   setCartProduct = (product, id) => {
-    const existingProduct = this.state.cartProduct.some(
-      prod => prod.product.id === id
-    );
-    console.log(product);
-    if (existingProduct) {
-      product.quantity = product.quantity + 1;
-      console.log(product);
-      return;
+    const existingProduct = [...this.state.cartProduct];
+
+    if (existingProduct.length === 0) {
+      existingProduct.push(product);
+      this.setState({
+        cartProduct: existingProduct,
+      });
+      alert('Product add cart');
+    } else {
+      const prevProduct = existingProduct
+        .filter(item => item.product.id === id)
+        .map(item => {
+          item.quantity = item.quantity + 1;
+          return item;
+        });
+
+      if (prevProduct.length === 0) {
+        existingProduct.push(product);
+        this.setState({
+          cartProduct: existingProduct,
+        });
+        alert('Product add cart');
+      } else {
+        const newCartProduct = existingProduct.filter(
+          item => item.product.id !== id
+        );
+        newCartProduct.push(...prevProduct);
+        this.setState({
+          cartProduct: newCartProduct,
+        });
+        alert('Product add cart');
+      }
     }
-    console.log(product);
-    this.setState(prevState => ({
-      cartProduct: [...prevState.cartProduct, product],
-    }));
-    alert('product add to cart');
   };
 
   activStyleCard = index => {

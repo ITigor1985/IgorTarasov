@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+export const BtnLink = styled(Link)`
+  color: white;
+`;
 
 export const TitleCart = styled.p`
   font-weight: 700;
