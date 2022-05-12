@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Currency from 'components/Currency';
 import { withRouter } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   ContainerImg,
   ImageCart,
@@ -17,7 +17,11 @@ import imageCart from '../../images/cart.svg';
 
 class ProductsListItem extends Component {
   select = (product, event) => {
+    console.log(event);
+
     if (product.attributes.length === 0) {
+      event.stopPropagation();
+      event.preventDefault();
       const quantity = 1;
       const imageIndex = 0;
       this.props.setCartProduct({ product, quantity, imageIndex }, product.id);
@@ -37,13 +41,12 @@ class ProductsListItem extends Component {
       <>
         {product.inStock ? (
           <ProductListItemContainer
-            //onClick={event => modalOpen(product.id, product.gallery[0], event)}
             className="card"
             onMouseOver={() => setActiveCard(index)}
             onMouseOut={() => setActiveCard(null)}
             value={index}
           >
-            <NavLink to={`${url}/${product.id}`}>
+            <Link to={`${url}/${product.id}`}>
               <ContainerImg>
                 <ImgProduct src={product.gallery[0]} alt={product.name} />
                 <AddToCart
@@ -67,7 +70,7 @@ class ProductsListItem extends Component {
                 currencie={currencie}
                 eventType="productCard"
               />
-            </NavLink>
+            </Link>
           </ProductListItemContainer>
         ) : (
           <ProductListItemContainer
@@ -76,7 +79,7 @@ class ProductsListItem extends Component {
             onMouseOver={() => setActiveCard(index)}
             onMouseOut={() => setActiveCard(null)}
           >
-            <NavLink to={`${url}/${product.id}`}>
+            <Link to={`${url}/${product.id}`}>
               <ContainerImg>
                 <ImgProduct src={product.gallery[0]} alt={product.name} />
                 <OutOfStock>Out Of Stock</OutOfStock>
@@ -90,7 +93,7 @@ class ProductsListItem extends Component {
                 currencie={currencie}
               />
               <Overley></Overley>
-            </NavLink>
+            </Link>
           </ProductListItemContainer>
         )}
       </>
