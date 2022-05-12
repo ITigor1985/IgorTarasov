@@ -18,7 +18,7 @@ import logo from '../images/a-logo.svg';
 import cart from '../images/vector.svg';
 
 import { Component } from 'react';
-import Cart from 'pages/cart/cart';
+import Cart from 'pages/Cart/Cart';
 //import Modal from './Modal';
 import Currencies from './Currencies';
 import { GlobalStyle } from 'GlobalStyled/GlobalStyled.styled';
@@ -26,7 +26,7 @@ import './App.css';
 import ModalCart from './ModalCart';
 import { GET_Categories } from 'query/query';
 import { Query } from '@apollo/client/react/components';
-import Child from 'pages/all/Child';
+import Child from 'pages/AllCategory/Child';
 import ProductPage from 'pages/ProductPage';
 
 class App extends Component {

@@ -18,17 +18,11 @@ class Currencies extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  /**
-   * Set the wrapper ref
-   */
   setWrapperRef = node => {
     console.log(node);
     this.wrapperRef = node;
   };
 
-  /**
-   * Alert if clicked on outside of element
-   */
   handleClickOutside = event => {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.props.toggle(event);
