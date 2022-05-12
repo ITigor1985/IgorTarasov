@@ -49,9 +49,14 @@ const heightAttributeColor = ({ eventType }) => {
   }
 };
 
+const bgAttributeColor = ({ bgColor }) => {
+  return bgColor;
+};
+
 export const AttributeColor = styled.div`
   width: ${widthAttributeColor};
   height: ${heightAttributeColor};
+  background-color: ${bgAttributeColor};
 `;
 
 export const AtrributeName = styled.h3`

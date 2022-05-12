@@ -79,9 +79,8 @@ class Attributes extends Component {
           >
             <AttributeColor
               eventType={this.props.eventType}
-              style={{
-                backgroundColor: item.value,
-              }}
+              bgColor={item.value}
+              
             ></AttributeColor>
           </AtrributesListColorItem>
         ));
