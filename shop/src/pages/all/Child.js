@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Query } from '@apollo/client/react/components';
 import { withRouter } from 'react-router';
 import { Get_category_products } from 'query/query';
-import './all.css';
+import './Child.css';
 import ProductsListItem from 'components/ProductsListItem';
 
 class Child extends Component {
