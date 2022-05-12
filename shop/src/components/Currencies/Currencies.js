@@ -19,7 +19,6 @@ class Currencies extends Component {
   }
 
   setWrapperRef = node => {
-    console.log(node);
     this.wrapperRef = node;
   };
 
