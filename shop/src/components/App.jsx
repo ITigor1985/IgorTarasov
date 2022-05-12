@@ -1,3 +1,6 @@
+import { Component } from 'react';
+import { GET_Categories } from 'query/query';
+import { Query } from '@apollo/client/react/components';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,16 +19,11 @@ import {
 } from './App.styled';
 import logo from '../images/a-logo.svg';
 import cart from '../images/vector.svg';
-
-import { Component } from 'react';
 import Cart from 'pages/Cart/Cart';
-//import Modal from './Modal';
 import Currencies from './Currencies';
 import { GlobalStyle } from 'GlobalStyled/GlobalStyled.styled';
 import './App.css';
 import ModalCart from './ModalCart';
-import { GET_Categories } from 'query/query';
-import { Query } from '@apollo/client/react/components';
 import Child from 'pages/AllCategory/Child';
 import ProductPage from 'pages/ProductPage';
 
@@ -89,15 +87,13 @@ class App extends Component {
   setCurrencie = (label, symbol, currentTarget, e) => {
     this.setState({ currencie: label, symbol: symbol });
     if (currentTarget === e.target) {
-      this.setState(prevState => ({
-        dropCurrenciesMenu: !prevState.dropCurrenciesMenu,
-      }));
+      this.setState({
+        dropCurrenciesMenu: false,
+      });
     }
   };
 
   toggle = event => {
-    console.log(event.currentTarget);
-    console.log(event.target);
     if (event.currentTarget !== event.target) {
       this.setState(prevState => ({
         dropCurrenciesMenu: !prevState.dropCurrenciesMenu,
