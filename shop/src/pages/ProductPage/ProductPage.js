@@ -25,6 +25,40 @@ import { OutOfStock } from 'components/ProductsListItem/ProductsListItem.styled'
 class ProductPage extends Component {
   state = {
     bigImage: '',
+    activeAttributes: [],
+  };
+
+  setAttributes = attribut => {
+    const existingProduct = [...this.state.activeAttributes];
+
+    if (existingProduct.length === 0) {
+      existingProduct.push(attribut);
+      this.setState({
+        activeAttributes: existingProduct,
+      });
+    } else {
+      const prevProduct = existingProduct
+        .filter(item => item.name === attribut.name)
+        .map(item => {
+          item.index = attribut.index;
+          return item;
+        });
+
+      if (prevProduct.length === 0) {
+        existingProduct.push(attribut);
+        this.setState({
+          activeAttributes: existingProduct,
+        });
+      } else {
+        const newCartProduct = existingProduct.filter(
+          item => item.name !== attribut.name
+        );
+        newCartProduct.push(...prevProduct);
+        this.setState({
+          activeAttributes: newCartProduct,
+        });
+      }
+    }
   };
 
   setImage = image => {
@@ -33,7 +67,7 @@ class ProductPage extends Component {
 
   render() {
     const { currencie, setCartProduct, match } = this.props;
-
+    const { activeAttributes } = this.state;
     const id = match.params.productId;
     const quantity = 1;
     const imageIndex = 0;
@@ -78,7 +112,10 @@ class ProductPage extends Component {
                 <ContainerDescription>
                   <ProductBrand>{product.brand}</ProductBrand>
                   <ProductName>{product.name}</ProductName>
-                  <Attributes productAttributes={product.attributes} />
+                  <Attributes
+                    productAttributes={product.attributes}
+                    setAttributes={this.setAttributes}
+                  />
                   <ProductPrice>Price:</ProductPrice>
                   <Currency product={product} currencie={currencie} />
 
@@ -87,7 +124,7 @@ class ProductPage extends Component {
                       type="button"
                       onClick={() =>
                         setCartProduct(
-                          { product, quantity, imageIndex },
+                          { product, quantity, imageIndex, activeAttributes },
                           product.id
                         )
                       }

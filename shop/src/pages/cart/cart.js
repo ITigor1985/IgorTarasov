@@ -55,8 +55,8 @@ class Cart extends Component {
     return (
       <main>
         <TitleCart>Cart</TitleCart>
-        {products.map(product => (
-          <ContainerCart key={product.product.id}>
+        {products.map((product, index) => (
+          <ContainerCart key={index}>
             <ContainerDescription>
               <ProductBrand>{product.product.brand}</ProductBrand>
               <ProductName>{product.product.name}</ProductName>

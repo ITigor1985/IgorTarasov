@@ -102,7 +102,10 @@ class App extends Component {
   };
 
   setCartProduct = (product, id) => {
-    const existingProduct = [...this.state.cartProduct];
+    const existingProduct = this.state.cartProduct;
+
+    console.log([{ b: 5 }]);
+    console.log(this.state.cartProduct);
 
     if (existingProduct.length === 0) {
       existingProduct.push(product);
@@ -112,12 +115,18 @@ class App extends Component {
       alert('Product add cart');
     } else {
       const prevProduct = existingProduct
-        .filter(item => item.product.id === id)
+        .filter(item => {
+          //console.log(this.state.cartProduct);
+          //console.log(JSON.stringify(item.activeAttributes));
+          //console.log(JSON.stringify(product.activeAttributes));
+          return item.product.id === id;
+        })
         .map(item => {
           item.quantity = item.quantity + 1;
           return item;
         });
-
+      //console.log(existingProduct);
+      //console.log(prevProduct);
       if (prevProduct.length === 0) {
         existingProduct.push(product);
         this.setState({
@@ -135,6 +144,7 @@ class App extends Component {
         alert('Product add cart');
       }
     }
+    //console.log(this.state.cartProduct);
   };
 
   activStyleCard = index => {

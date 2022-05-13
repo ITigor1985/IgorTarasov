@@ -53,20 +53,25 @@ class Attributes extends Component {
     return styleOption.join(' ');
   };
 
-  setActiveColorButon = index => {
-    this.setState({ name: index });
+  setActiveColorButon = (index, name) => {
+    this.setState({ activColorIndex: index });
+    this.props.setAttributes({ name, index });
   };
-  setActiveCapacityButon = index => {
+  setActiveCapacityButon = (index, name) => {
     this.setState({ activCapacityIndex: index });
+    this.props.setAttributes({ name, index });
   };
-  setActiveUSBButon = index => {
+  setActiveUSBButon = (index, name) => {
     this.setState({ activUSBIndex: index });
+    this.props.setAttributes({ name, index });
   };
-  setActiveTIDButon = index => {
+  setActiveTIDButon = (index, name) => {
     this.setState({ activTIDIndex: index });
+    this.props.setAttributes({ name, index });
   };
-  setActiveSizeButon = index => {
+  setActiveSizeButon = (index, name) => {
     this.setState({ activSizeIndex: index });
+    this.props.setAttributes({ name, index });
   };
   getAttributes = (name, items) => {
     switch (name) {
@@ -74,7 +79,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListColorItem
             key={item.id}
-            onClick={() => this.setActiveColorButon(index)}
+            onClick={() => this.setActiveColorButon(index, name)}
             className={this.activStyleColorButton(index)}
           >
             <AttributeColor
@@ -88,7 +93,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveCapacityButon(index)}
+            onClick={() => this.setActiveCapacityButon(index, name)}
             className={this.activStyleCapacityButton(index)}
             eventType={this.props.eventType}
           >
@@ -99,7 +104,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveUSBButon(index)}
+            onClick={() => this.setActiveUSBButon(index, name)}
             className={this.activStyleUSBButton(index)}
             eventType={this.props.eventType}
           >
@@ -110,7 +115,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveTIDButon(index)}
+            onClick={() => this.setActiveTIDButon(index, name)}
             className={this.activStyleTIDButton(index)}
             eventType={this.props.eventType}
           >
@@ -121,7 +126,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveSizeButon(index)}
+            onClick={() => this.setActiveSizeButon(index, name)}
             className={this.activStyleSizeButton(index)}
             eventType={this.props.eventType}
           >
@@ -136,7 +141,7 @@ class Attributes extends Component {
 
   render() {
     const { productAttributes } = this.props;
-    console.log(productAttributes);
+
     return (
       <>
         {productAttributes.map(attribute => (
