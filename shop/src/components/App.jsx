@@ -36,6 +36,7 @@ class App extends Component {
     symbol: '$',
     modalCartOpen: false,
     dropCurrenciesMenu: false,
+    activeAttributes: [],
   };
   componentDidMount() {
     const products = localStorage.getItem('products');
@@ -64,6 +65,40 @@ class App extends Component {
       product => product.product.id !== id
     );
     this.setState({ cartProduct: products });
+  };
+
+  setAttributes = attribut => {
+    console.log(attribut)
+    const existingProduct = [...this.state.activeAttributes];
+
+    if (existingProduct.length === 0) {
+      existingProduct.push(attribut);
+      this.setState({
+        activeAttributes: existingProduct,
+      });
+    } else {
+      const prevProduct = existingProduct
+        .filter(item => item.name === attribut.name && item.productId === attribut.productId)
+        .map(item => {          
+          item.index = attribut.index;
+          return item;
+        });
+
+      if (prevProduct.length === 0) {
+        existingProduct.push(attribut);
+        this.setState({
+          activeAttributes: existingProduct,
+        });
+      } else {
+        const newCartProduct = existingProduct.filter(
+          item => item.name !== attribut.name
+        );
+        newCartProduct.push(...prevProduct);
+        this.setState({
+          activeAttributes: newCartProduct,
+        });
+      }
+    }
   };
 
   handleIncrement = (quantity, id) => {
@@ -102,10 +137,9 @@ class App extends Component {
   };
 
   setCartProduct = (product, id) => {
+    console.log(product)
     const existingProduct = this.state.cartProduct;
-
-    console.log([{ b: 5 }]);
-    console.log(this.state.cartProduct);
+    
 
     if (existingProduct.length === 0) {
       existingProduct.push(product);
@@ -115,18 +149,15 @@ class App extends Component {
       alert('Product add cart');
     } else {
       const prevProduct = existingProduct
-        .filter(item => {
-          //console.log(this.state.cartProduct);
-          //console.log(JSON.stringify(item.activeAttributes));
-          //console.log(JSON.stringify(product.activeAttributes));
+        .filter(item => {          
           return item.product.id === id;
         })
         .map(item => {
           item.quantity = item.quantity + 1;
           return item;
         });
-      //console.log(existingProduct);
-      //console.log(prevProduct);
+
+      
       if (prevProduct.length === 0) {
         existingProduct.push(product);
         this.setState({
@@ -144,7 +175,7 @@ class App extends Component {
         alert('Product add cart');
       }
     }
-    //console.log(this.state.cartProduct);
+    
   };
 
   activStyleCard = index => {
@@ -170,8 +201,10 @@ class App extends Component {
       this.setState({ modalCartOpen: false });
     document.body.style.overflow = 'visible';
   };
+  
 
   render() {
+    //console.log(this.state.cartProduct)
     return (
       <Container>
         <Router>
@@ -256,6 +289,8 @@ class App extends Component {
                   bigImage={this.state.firstNaturalSizeImage}
                   currencie={this.state.currencie}
                   setCartProduct={this.setCartProduct}
+                  setAttributes={this.setAttributes}
+                  activeAttributes={this.state.activeAttributes}
                 />
               </Route>
             </Switch>

@@ -25,49 +25,53 @@ import { OutOfStock } from 'components/ProductsListItem/ProductsListItem.styled'
 class ProductPage extends Component {
   state = {
     bigImage: '',
-    activeAttributes: [],
+    
   };
+// componentDidUpdate(prevProps){
+//   if(this.props.activeAttributes !== prevProps.activeAttributes){
+//     console.log(prevProps)
+//   }
+// }
+  // setAttributes = attribut => {
+  //   const existingProduct = [...this.state.activeAttributes];
 
-  setAttributes = attribut => {
-    const existingProduct = [...this.state.activeAttributes];
+  //   if (existingProduct.length === 0) {
+  //     existingProduct.push(attribut);
+  //     this.setState({
+  //       activeAttributes: existingProduct,
+  //     });
+  //   } else {
+  //     const prevProduct = existingProduct
+  //       .filter(item => item.name === attribut.name)
+  //       .map(item => {          
+  //         item.index = attribut.index;
+  //         return item;
+  //       });
 
-    if (existingProduct.length === 0) {
-      existingProduct.push(attribut);
-      this.setState({
-        activeAttributes: existingProduct,
-      });
-    } else {
-      const prevProduct = existingProduct
-        .filter(item => item.name === attribut.name)
-        .map(item => {
-          item.index = attribut.index;
-          return item;
-        });
-
-      if (prevProduct.length === 0) {
-        existingProduct.push(attribut);
-        this.setState({
-          activeAttributes: existingProduct,
-        });
-      } else {
-        const newCartProduct = existingProduct.filter(
-          item => item.name !== attribut.name
-        );
-        newCartProduct.push(...prevProduct);
-        this.setState({
-          activeAttributes: newCartProduct,
-        });
-      }
-    }
-  };
+  //     if (prevProduct.length === 0) {
+  //       existingProduct.push(attribut);
+  //       this.setState({
+  //         activeAttributes: existingProduct,
+  //       });
+  //     } else {
+  //       const newCartProduct = existingProduct.filter(
+  //         item => item.name !== attribut.name
+  //       );
+  //       newCartProduct.push(...prevProduct);
+  //       this.setState({
+  //         activeAttributes: newCartProduct,
+  //       });
+  //     }
+  //   }
+  // };
 
   setImage = image => {
     this.setState({ bigImage: image });
   };
 
   render() {
-    const { currencie, setCartProduct, match } = this.props;
-    const { activeAttributes } = this.state;
+    const { currencie, setCartProduct, match, setAttributes, activeAttributes } = this.props;
+    
     const id = match.params.productId;
     const quantity = 1;
     const imageIndex = 0;
@@ -114,7 +118,8 @@ class ProductPage extends Component {
                   <ProductName>{product.name}</ProductName>
                   <Attributes
                     productAttributes={product.attributes}
-                    setAttributes={this.setAttributes}
+                    productId={product.id}
+                    setAttributes={setAttributes}
                   />
                   <ProductPrice>Price:</ProductPrice>
                   <Currency product={product} currencie={currencie} />
