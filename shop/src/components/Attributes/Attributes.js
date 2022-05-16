@@ -53,33 +53,33 @@ class Attributes extends Component {
     return styleOption.join(' ');
   };
 
-  setActiveColorButon = (index, name) => {
+  setActiveColorButon = (index, name, productId) => {
     this.setState({ activColorIndex: index });
-    this.props.setAttributes({ name, index });
+    this.props.setAttributes({ name, index, productId });
   };
-  setActiveCapacityButon = (index, name) => {
+  setActiveCapacityButon = (index, name, productId) => {
     this.setState({ activCapacityIndex: index });
-    this.props.setAttributes({ name, index });
+    this.props.setAttributes({ name, index, productId });
   };
-  setActiveUSBButon = (index, name) => {
+  setActiveUSBButon = (index, name, productId) => {
     this.setState({ activUSBIndex: index });
-    this.props.setAttributes({ name, index });
+    this.props.setAttributes({ name, index, productId });
   };
-  setActiveTIDButon = (index, name) => {
+  setActiveTIDButon = (index, name, productId) => {
     this.setState({ activTIDIndex: index });
-    this.props.setAttributes({ name, index });
+    this.props.setAttributes({ name, index, productId });
   };
-  setActiveSizeButon = (index, name) => {
+  setActiveSizeButon = (index, name, productId) => {
     this.setState({ activSizeIndex: index });
-    this.props.setAttributes({ name, index });
+    this.props.setAttributes({ name, index, productId });
   };
-  getAttributes = (name, items) => {
+  getAttributes = (name, items, productId) => {
     switch (name) {
       case 'Color':
         return items.map((item, index) => (
           <AtrributesListColorItem
             key={item.id}
-            onClick={() => this.setActiveColorButon(index, name)}
+            onClick={() => this.setActiveColorButon(index, name, productId)}
             className={this.activStyleColorButton(index)}
           >
             <AttributeColor
@@ -93,7 +93,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveCapacityButon(index, name)}
+            onClick={() => this.setActiveCapacityButon(index, name, productId)}
             className={this.activStyleCapacityButton(index)}
             eventType={this.props.eventType}
           >
@@ -104,7 +104,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveUSBButon(index, name)}
+            onClick={() => this.setActiveUSBButon(index, name, productId)}
             className={this.activStyleUSBButton(index)}
             eventType={this.props.eventType}
           >
@@ -115,7 +115,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveTIDButon(index, name)}
+            onClick={() => this.setActiveTIDButon(index, name, productId)}
             className={this.activStyleTIDButton(index)}
             eventType={this.props.eventType}
           >
@@ -126,7 +126,7 @@ class Attributes extends Component {
         return items.map((item, index) => (
           <AtrributesListCapacityItem
             key={item.id}
-            onClick={() => this.setActiveSizeButon(index, name)}
+            onClick={() => this.setActiveSizeButon(index, name, productId)}
             className={this.activStyleSizeButton(index)}
             eventType={this.props.eventType}
           >
@@ -140,15 +140,15 @@ class Attributes extends Component {
   };
 
   render() {
-    const { productAttributes } = this.props;
-
+    const { productAttributes, productId } = this.props;
+    //console.log(productAttributes, productId)
     return (
       <>
         {productAttributes.map(attribute => (
           <div key={attribute.id}>
             <AtrributeName>{attribute.name}</AtrributeName>
             <AtrributesList>
-              {this.getAttributes(attribute.name, attribute.items)}
+              {this.getAttributes(attribute.name, attribute.items, productId)}
             </AtrributesList>
           </div>
         ))}
