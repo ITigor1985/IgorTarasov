@@ -27,6 +27,7 @@ class ProductPage extends Component {
     bigImage: '',
     
   };
+  
 // componentDidUpdate(prevProps){
 //   if(this.props.activeAttributes !== prevProps.activeAttributes){
 //     console.log(prevProps)
@@ -71,16 +72,20 @@ class ProductPage extends Component {
 
   render() {
     const { currencie, setCartProduct, match, setAttributes, activeAttributes } = this.props;
-    
+    const interval = 100
     const id = match.params.productId;
     const quantity = 1;
     const imageIndex = 0;
     return (
       <Container className="modal">
-        <Query variables={{ id }} query={GET_PRODUCT}>
-          {({ data, loading }) => {
-            if (loading) return 'Loading...';
+        <Query variables={{ id }} query={GET_PRODUCT} >
+          {({ data, loading,startPolling, stopPolling }) => {                        
+            startPolling	(interval)
+            setTimeout(()=>{stopPolling()},150)              
+            if (loading)return null;
+            
             const { product } = data;
+            
             return (
               <ContainerProduct>
                 <ListGallery>
@@ -116,6 +121,7 @@ class ProductPage extends Component {
                 <ContainerDescription>
                   <ProductBrand>{product.brand}</ProductBrand>
                   <ProductName>{product.name}</ProductName>
+                  {console.log(product.attributes)}
                   <Attributes
                     productAttributes={product.attributes}
                     productId={product.id}

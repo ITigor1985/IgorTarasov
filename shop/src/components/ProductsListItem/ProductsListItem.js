@@ -17,7 +17,7 @@ import imageCart from '../../images/cart.svg';
 
 class ProductsListItem extends Component {
   select = (product, event) => {
-    console.log(event);
+    
 
     if (product.attributes.length === 0) {
       event.stopPropagation();

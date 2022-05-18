@@ -14,8 +14,16 @@ import {
 
 class Carousel extends Component {
   state = {
-    product: this.props.product,
+    product: this.props.product
   };
+  
+  
+  componentDidUpdate(prevProps){
+    if(prevProps.product !== this.props.product){
+      this.setState({product:this.props.product})
+    }
+  }
+
 
   setNextActiveImage = (imageIndex, id, length) => {
     const next = imageIndex + 1;
@@ -45,6 +53,7 @@ class Carousel extends Component {
   render() {
     const { product } = this.state;
     const { eventType } = this.props;
+    //console.log(typeof(this.props.product))
     return (
       <CarouselCartProducts eventType={eventType}>
         {product.product.gallery.length > 1 && (

@@ -285,8 +285,8 @@ class App extends Component {
               </Route>
               <Route path="/:id/:productId" children={<ProductPage />}>
                 <ProductPage
-                  productId={this.state.productId}
-                  bigImage={this.state.firstNaturalSizeImage}
+                  //productId={this.state.productId}
+                  //bigImage={this.state.firstNaturalSizeImage}
                   currencie={this.state.currencie}
                   setCartProduct={this.setCartProduct}
                   setAttributes={this.setAttributes}
