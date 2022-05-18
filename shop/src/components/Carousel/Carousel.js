@@ -53,7 +53,7 @@ class Carousel extends Component {
   render() {
     const { product } = this.state;
     const { eventType } = this.props;
-    //console.log(typeof(this.props.product))
+    
     return (
       <CarouselCartProducts eventType={eventType}>
         {product.product.gallery.length > 1 && (

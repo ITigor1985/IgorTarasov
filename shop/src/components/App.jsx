@@ -68,7 +68,7 @@ class App extends Component {
   };
 
   setAttributes = attribut => {
-    console.log(attribut)
+    
     const existingProduct = [...this.state.activeAttributes];
 
     if (existingProduct.length === 0) {
@@ -137,7 +137,7 @@ class App extends Component {
   };
 
   setCartProduct = (product, id) => {
-    console.log(product)
+    
     const existingProduct = this.state.cartProduct;
     
 
@@ -203,8 +203,7 @@ class App extends Component {
   };
   
 
-  render() {
-    //console.log(this.state.cartProduct)
+  render() {    
     return (
       <Container>
         <Router>
@@ -284,9 +283,7 @@ class App extends Component {
                 />
               </Route>
               <Route path="/:id/:productId" children={<ProductPage />}>
-                <ProductPage
-                  //productId={this.state.productId}
-                  //bigImage={this.state.firstNaturalSizeImage}
+                <ProductPage                  
                   currencie={this.state.currencie}
                   setCartProduct={this.setCartProduct}
                   setAttributes={this.setAttributes}

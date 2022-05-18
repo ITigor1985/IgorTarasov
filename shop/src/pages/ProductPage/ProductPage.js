@@ -26,45 +26,8 @@ class ProductPage extends Component {
   state = {
     bigImage: '',
     
-  };
-  
-// componentDidUpdate(prevProps){
-//   if(this.props.activeAttributes !== prevProps.activeAttributes){
-//     console.log(prevProps)
-//   }
-// }
-  // setAttributes = attribut => {
-  //   const existingProduct = [...this.state.activeAttributes];
+  };  
 
-  //   if (existingProduct.length === 0) {
-  //     existingProduct.push(attribut);
-  //     this.setState({
-  //       activeAttributes: existingProduct,
-  //     });
-  //   } else {
-  //     const prevProduct = existingProduct
-  //       .filter(item => item.name === attribut.name)
-  //       .map(item => {          
-  //         item.index = attribut.index;
-  //         return item;
-  //       });
-
-  //     if (prevProduct.length === 0) {
-  //       existingProduct.push(attribut);
-  //       this.setState({
-  //         activeAttributes: existingProduct,
-  //       });
-  //     } else {
-  //       const newCartProduct = existingProduct.filter(
-  //         item => item.name !== attribut.name
-  //       );
-  //       newCartProduct.push(...prevProduct);
-  //       this.setState({
-  //         activeAttributes: newCartProduct,
-  //       });
-  //     }
-  //   }
-  // };
 
   setImage = image => {
     this.setState({ bigImage: image });
@@ -121,7 +84,7 @@ class ProductPage extends Component {
                 <ContainerDescription>
                   <ProductBrand>{product.brand}</ProductBrand>
                   <ProductName>{product.name}</ProductName>
-                  {console.log(product.attributes)}
+                  
                   <Attributes
                     productAttributes={product.attributes}
                     productId={product.id}
