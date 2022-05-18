@@ -47,7 +47,7 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate(prevState) {
     const nextProducts = this.state.cartProduct;
     const prevProducts = prevState.cartProduct;
 
