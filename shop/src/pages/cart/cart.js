@@ -65,7 +65,7 @@ class Cart extends Component {
                 currencie={currencie}
                 eventType="cart"
               />
-              <Attributes productAttributes={product.product.attributes} />
+              <Attributes productAttributes={product.product.attributes} setAttributes={this.props.setAttributes}/>
               <RemoveProduct onClick={() => removeProduct(product.product.id)}>
                 delete
               </RemoveProduct>

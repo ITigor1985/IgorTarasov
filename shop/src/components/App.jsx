@@ -255,6 +255,7 @@ class App extends Component {
                   handleDecrement={this.handleDecrement}
                   closeModalCart={this.closeModalCart}
                   removeProduct={this.removeProduct}
+                  setAttributes={this.setAttributes}
                 />
               )}
             </Header>
@@ -270,6 +271,7 @@ class App extends Component {
                     handleDecrement={this.handleDecrement}
                     setProducts={this.setProducts}
                     removeProduct={this.removeProduct}
+                    setAttributes={this.setAttributes}
                   />
                 )}
               </Route>

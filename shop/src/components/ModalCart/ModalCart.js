@@ -87,6 +87,7 @@ class ModalCart extends Component {
                     <Attributes
                       productAttributes={product.product.attributes}
                       eventType="modalCart"
+                      setAttributes={this.props.setAttributes}
                     />
                   </ContainerDescription>
                   <ContainerCounterCarousel>
