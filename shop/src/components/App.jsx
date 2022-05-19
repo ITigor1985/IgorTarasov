@@ -26,7 +26,7 @@ import './App.css';
 import ModalCart from './ModalCart';
 import Child from 'pages/AllCategory/Child';
 import ProductPage from 'pages/ProductPage';
-import Cart from 'pages/Cart/cart';
+import Cart from 'pages/cart/cart';
 
 class App extends Component {
   state = {
