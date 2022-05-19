@@ -17,7 +17,7 @@ import {
   Total,
   RemoveProduct,
   BtnLink,
-} from './cart.styled';
+} from './Cart.styled';
 
 class Cart extends Component {
   allQuantityProducts(products) {
