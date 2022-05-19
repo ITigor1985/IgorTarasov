@@ -17,7 +17,7 @@ import {
   Total,
   RemoveProduct,
   BtnLink,
-} from './Cart.styled';
+} from './cart.styled';
 
 class Cart extends Component {
   allQuantityProducts(products) {
@@ -65,7 +65,10 @@ class Cart extends Component {
                 currencie={currencie}
                 eventType="cart"
               />
-              <Attributes productAttributes={product.product.attributes} setAttributes={this.props.setAttributes}/>
+              <Attributes
+                productAttributes={product.product.attributes}
+                setAttributes={this.props.setAttributes}
+              />
               <RemoveProduct onClick={() => removeProduct(product.product.id)}>
                 delete
               </RemoveProduct>

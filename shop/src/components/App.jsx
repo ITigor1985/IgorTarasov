@@ -19,13 +19,14 @@ import {
 } from './App.styled';
 import logo from '../images/a-logo.svg';
 import cart from '../images/vector.svg';
-import Cart from 'pages/Cart/Cart';
+
 import Currencies from './Currencies';
 import { GlobalStyle } from 'GlobalStyled/GlobalStyled.styled';
 import './App.css';
 import ModalCart from './ModalCart';
 import Child from 'pages/AllCategory/Child';
 import ProductPage from 'pages/ProductPage';
+import Cart from 'pages/Cart/cart';
 
 class App extends Component {
   state = {
@@ -68,7 +69,6 @@ class App extends Component {
   };
 
   setAttributes = attribut => {
-    
     const existingProduct = [...this.state.activeAttributes];
 
     if (existingProduct.length === 0) {
@@ -78,8 +78,11 @@ class App extends Component {
       });
     } else {
       const prevProduct = existingProduct
-        .filter(item => item.name === attribut.name && item.productId === attribut.productId)
-        .map(item => {          
+        .filter(
+          item =>
+            item.name === attribut.name && item.productId === attribut.productId
+        )
+        .map(item => {
           item.index = attribut.index;
           return item;
         });
@@ -137,9 +140,7 @@ class App extends Component {
   };
 
   setCartProduct = (product, id) => {
-    
     const existingProduct = this.state.cartProduct;
-    
 
     if (existingProduct.length === 0) {
       existingProduct.push(product);
@@ -149,7 +150,7 @@ class App extends Component {
       alert('Product add cart');
     } else {
       const prevProduct = existingProduct
-        .filter(item => {          
+        .filter(item => {
           return item.product.id === id;
         })
         .map(item => {
@@ -157,7 +158,6 @@ class App extends Component {
           return item;
         });
 
-      
       if (prevProduct.length === 0) {
         existingProduct.push(product);
         this.setState({
@@ -175,7 +175,6 @@ class App extends Component {
         alert('Product add cart');
       }
     }
-    
   };
 
   activStyleCard = index => {
@@ -201,9 +200,8 @@ class App extends Component {
       this.setState({ modalCartOpen: false });
     document.body.style.overflow = 'visible';
   };
-  
 
-  render() {    
+  render() {
     return (
       <Container>
         <Router>
@@ -285,7 +283,7 @@ class App extends Component {
                 />
               </Route>
               <Route path="/:id/:productId" children={<ProductPage />}>
-                <ProductPage                  
+                <ProductPage
                   currencie={this.state.currencie}
                   setCartProduct={this.setCartProduct}
                   setAttributes={this.setAttributes}
