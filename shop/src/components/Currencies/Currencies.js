@@ -23,6 +23,7 @@ class Currencies extends Component {
   };
 
   handleClickOutside = event => {
+    console.log(this.wrapperRef.contains(event.target));
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.props.toggle(event);
     }

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import debounce from 'lodash.debounce';
 import { GET_Categories } from 'query/query';
 import { Query } from '@apollo/client/react/components';
 import {
@@ -139,6 +140,8 @@ class App extends Component {
     }
   };
 
+  debounceToggle = debounce(this.toggle, 300);
+
   setCartProduct = (product, id) => {
     const existingProduct = this.state.cartProduct;
 
@@ -228,7 +231,8 @@ class App extends Component {
                   setCurrencie={this.setCurrencie}
                   symbol={this.state.symbol}
                   dropCurrenciesMenu={this.state.dropCurrenciesMenu}
-                  toggle={this.toggle}
+                  //toggle={this.toggle}
+                  toggle={this.debounceToggle}
                   closeCurrenciesDropDown={this.closeCurrenciesDropDown}
                 />
                 <BtnCart type="button" onClick={this.toggleModalCart}>
